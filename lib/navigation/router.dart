@@ -1,4 +1,4 @@
-import 'package:bodytherapy/ui/exercises/view_models/exercises_model.dart';
+import 'package:bodytherapy/ui/exercises/view_models/exercises_viewmodel.dart';
 import 'package:bodytherapy/ui/exercises/widgets/exercises_page.dart';
 import 'package:bodytherapy/ui/home/view_models/home_viewmodel.dart';
 import 'package:bodytherapy/ui/preferences/view_models/preferences_model.dart';

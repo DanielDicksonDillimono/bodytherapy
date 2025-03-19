@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../view_models/exercises_model.dart';
+import '../view_models/exercises_viewmodel.dart';
 
 class ExercisesPage extends StatelessWidget {
   const ExercisesPage({super.key, required this.exercisesModel});
