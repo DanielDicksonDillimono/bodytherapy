@@ -13,11 +13,15 @@ class ExcerciseCard extends StatelessWidget {
             builder: (BuildContext context) =>
                 ExercisePage(exerciseModel: exerciseModel)));
       },
-      child: ListTile(
-        leading: Icon(Icons.accessibility_new_rounded),
-        title: Text(exerciseModel.name),
-        subtitle: Text(exerciseModel.targetArea),
-        trailing: IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+      child: Card(
+        shape: RoundedRectangleBorder(),
+        elevation: 1.0,
+        child: ListTile(
+          leading: Icon(Icons.accessibility_new_rounded),
+          title: Text(exerciseModel.name),
+          subtitle: Text(exerciseModel.targetArea),
+          trailing: IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+        ),
       ),
     );
   }

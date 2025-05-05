@@ -9,9 +9,12 @@ class ReportsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Reports Pages"),
-      ),
+      body: SafeArea(
+          child: ListenableBuilder(
+        listenable: reportsViewmodel,
+        builder: (context, _) => ListView.builder(
+            itemBuilder: (BuildContext context, int index) => Card()),
+      )),
     );
   }
 }

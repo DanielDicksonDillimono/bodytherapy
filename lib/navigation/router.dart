@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
 import 'package:bodytherapy/ui/exercises/view_models/exercises_viewmodel.dart';
-import 'package:bodytherapy/ui/exercises/widgets/exercises_page.dart';
+import 'package:bodytherapy/ui/exercises/widgets/exercise_library.dart';
 import 'package:bodytherapy/ui/home/view_models/home_viewmodel.dart';
 import 'package:bodytherapy/ui/preferences/view_models/preferences_model.dart';
 import 'package:bodytherapy/ui/preferences/widgets/preferences_page.dart';
 import 'package:bodytherapy/ui/reports/view_models/reports_viewmodel.dart';
 import 'package:bodytherapy/ui/reports/widgets/reports_page.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'routes.dart';
 import 'scaffold_with_bottom_nav_bar.dart';
 import '../ui/home/widgets/home_page.dart';
@@ -24,7 +27,9 @@ final router = GoRouter(
             GoRoute(
               path: Routes.home,
               builder: (BuildContext context, GoRouterState state) => HomePage(
-                viewModel: HomeViewModel(),
+                viewModel: HomeViewModel(
+                    userRepository: context.read(),
+                    reportsRepository: context.read()),
               ),
             ),
           ],
