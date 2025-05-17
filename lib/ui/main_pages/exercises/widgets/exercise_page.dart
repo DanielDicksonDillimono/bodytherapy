@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ExercisePage extends StatelessWidget {
   const ExercisePage({required this.exerciseModel, super.key});
 
-  final ExerciseModel exerciseModel;
+  final Exercise exerciseModel;
 
   @override
   Widget build(BuildContext context) {

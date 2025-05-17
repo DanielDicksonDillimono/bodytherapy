@@ -29,8 +29,8 @@ final router = GoRouter(
               path: Routes.home,
               builder: (BuildContext context, GoRouterState state) => HomePage(
                 viewModel: HomeViewModel(
-                    userRepository: context.read(),
-                    reportsRepository: context.read()),
+                    reportsRepository: context.read(),
+                    userRepository: context.read()),
               ),
             ),
           ],

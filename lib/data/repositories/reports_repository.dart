@@ -2,16 +2,14 @@
 // Will fetch, update, filter or archive a report
 
 import 'package:bodytherapy/domain/models/report_model.dart';
-import 'package:bodytherapy/domain/models/user_model.dart';
 
 class ReportsRepository {
   //Get Reports
   //Sort based on diagnosed and undiagnosed
 
-  const ReportsRepository(this._userModel);
-  final User _userModel;
+  const ReportsRepository();
 
-  Future<List<Report>> getAllReports() async {
+  Future<List<Report>> getAllReports(String userId) async {
     List<Report> retreivedReports = [];
     //fetch reports from DB
     try {} catch (e) {
@@ -26,7 +24,7 @@ class ReportsRepository {
     }
   }
 
-  Future<List<Report>> getDiagnosedReports() async {
+  Future<List<Report>> getDiagnosedReports(String userId) async {
     List<Report> retreivedReports = [];
     //fetch reports from DB
     try {} catch (e) {
