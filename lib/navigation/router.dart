@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'package:bodytherapy/ui/exercises/view_models/exercises_viewmodel.dart';
-import 'package:bodytherapy/ui/exercises/widgets/exercise_library.dart';
-import 'package:bodytherapy/ui/home/view_models/home_viewmodel.dart';
-import 'package:bodytherapy/ui/preferences/view_models/preferences_model.dart';
-import 'package:bodytherapy/ui/preferences/widgets/preferences_page.dart';
-import 'package:bodytherapy/ui/reports/view_models/reports_viewmodel.dart';
-import 'package:bodytherapy/ui/reports/widgets/reports_page.dart';
+import 'package:bodytherapy/ui/main_pages/exercises/view_models/exercises_viewmodel.dart';
+import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_library.dart';
+import 'package:bodytherapy/ui/main_pages/home/view_models/home_viewmodel.dart';
+import 'package:bodytherapy/ui/main_pages/preferences/view_models/preferences_model.dart';
+import 'package:bodytherapy/ui/main_pages/preferences/widgets/preferences_page.dart';
+import 'package:bodytherapy/ui/main_pages/reports/view_models/reports_viewmodel.dart';
+import 'package:bodytherapy/ui/main_pages/reports/widgets/reports_page.dart';
 
 import 'routes.dart';
 import 'scaffold_with_bottom_nav_bar.dart';
-import '../ui/home/widgets/home_page.dart';
+import '../ui/main_pages/home/widgets/home_page.dart';
 
 final router = GoRouter(
   initialLocation: Routes.home,
   routes: [
     StatefulShellRoute.indexedStack(
+      // TODO: check User Auth i.e userSignedin ? ScaffolScaffoldWithBottomNavBar(navigationShell: navShell) : signInScreen()
       builder: (context, state, navShell) =>
           ScaffoldWithBottomNavBar(navigationShell: navShell),
       branches: [

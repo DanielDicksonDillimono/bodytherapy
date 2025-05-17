@@ -1,5 +1,5 @@
-class ExerciseModel {
-  ExerciseModel(
+class Exercise {
+  Exercise(
       {required this.name,
       required this.description,
       required this.targetArea});

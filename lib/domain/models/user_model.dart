@@ -1,12 +1,12 @@
 //users are either patients or "careTakers".
 
-class UserModel {
-  const UserModel({required String name, required String id})
+class User {
+  const User({required String name, required String id})
       : _name = name,
         _id = id,
         _organisationId = "";
 
-  const UserModel.careTaker(
+  const User.careTaker(
       {required String name,
       required String id,
       required String organisationId})

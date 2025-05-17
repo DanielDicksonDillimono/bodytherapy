@@ -1,4 +1,4 @@
-import 'package:bodytherapy/ui/reports/view_models/reports_viewmodel.dart';
+import 'package:bodytherapy/ui/main_pages/reports/view_models/reports_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 class ReportsPage extends StatelessWidget {

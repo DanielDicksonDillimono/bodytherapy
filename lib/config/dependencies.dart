@@ -9,5 +9,5 @@ List<SingleChildWidget> providers = [
   ),
   Provider(
     create: (context) => ReportsRepository(),
-  )
+  ),
 ];
