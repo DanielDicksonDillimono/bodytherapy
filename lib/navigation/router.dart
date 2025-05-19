@@ -43,7 +43,10 @@ final router = GoRouter(
               path: Routes.reports,
               builder: (BuildContext context, GoRouterState state) =>
                   ReportsPage(
-                reportsViewmodel: ReportsViewmodel(),
+                reportsViewmodel: ReportsViewmodel(
+                  reportsRepository: context.read(),
+                  userRepository: context.read(),
+                ),
               ),
             ),
           ],
