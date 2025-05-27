@@ -1,5 +1,5 @@
 import 'package:bodytherapy/domain/models/exercise_model.dart';
-import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_page.dart';
+import 'package:bodytherapy/ui/sub_pages/exercise/widgets/exercise_page.dart';
 import 'package:flutter/material.dart';
 
 class ExcerciseCard extends StatelessWidget {

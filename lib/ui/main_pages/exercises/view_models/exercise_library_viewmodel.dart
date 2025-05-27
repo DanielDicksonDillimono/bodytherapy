@@ -1,7 +1,6 @@
 import 'package:bodytherapy/data/repositories/exercises_repository.dart';
 import 'package:bodytherapy/domain/models/exercise_model.dart';
 import 'package:flutter/material.dart';
-import 'package:bodytherapy/core/shared_elements.dart';
 
 class ExerciseLibraryViewModel extends ChangeNotifier {
   ExerciseLibraryViewModel({required ExercisesRepository exerciseRepository})

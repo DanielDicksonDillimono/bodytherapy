@@ -14,4 +14,21 @@ class ExercisesRepository {
 
     return foundExercises;
   }
+
+  Future<Exercise> getExercise(String exerciseId) async {
+    Exercise foundExercise = Exercise(
+      id: exerciseId,
+      name: '',
+      description: '',
+      target: ExerciseTarget.all,
+      creatorId: '',
+    );
+    //await get exercise from DB
+
+    return foundExercise;
+  }
+
+  Future addExerciseTofavorites(Exercise exercise) async {
+    //await add exercise to favorites in DB
+  }
 }
