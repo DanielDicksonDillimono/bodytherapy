@@ -1,4 +1,4 @@
-import 'package:bodytherapy/models/exercise_model.dart';
+import 'package:bodytherapy/domain/models/exercise_model.dart';
 import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class ExcerciseCard extends StatelessWidget {
         child: ListTile(
           leading: Icon(Icons.accessibility_new_rounded),
           title: Text(exerciseModel.name),
-          subtitle: Text(exerciseModel.targetArea),
+          subtitle: Text(exerciseModel.target),
           trailing: IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
         ),
       ),

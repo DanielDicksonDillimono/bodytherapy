@@ -1,4 +1,4 @@
-import 'package:bodytherapy/models/exercise_model.dart';
+import 'package:bodytherapy/domain/models/exercise_model.dart';
 import 'package:flutter/material.dart';
 
 class ExercisePage extends StatelessWidget {

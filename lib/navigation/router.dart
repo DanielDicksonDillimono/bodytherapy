@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'package:bodytherapy/ui/main_pages/exercises/view_models/exercises_viewmodel.dart';
+import 'package:bodytherapy/ui/main_pages/exercises/view_models/exercise_library_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_library.dart';
 import 'package:bodytherapy/ui/main_pages/home/view_models/home_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/preferences/view_models/preferences_model.dart';
@@ -58,8 +58,10 @@ final router = GoRouter(
             GoRoute(
               path: Routes.exercises,
               builder: (BuildContext context, GoRouterState state) =>
-                  ExercisesPage(
-                exercisesModel: ExercisesModel(),
+                  ExerciseLibraryPage(
+                exerciseLibraryModel: ExerciseLibraryViewModel(
+                  exerciseRepository: context.read(),
+                ),
               ),
             ),
           ],
