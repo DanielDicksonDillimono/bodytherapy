@@ -1,3 +1,4 @@
+import 'package:bodytherapy/data/services/user_authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -16,9 +17,9 @@ import '../ui/main_pages/home/widgets/home_page.dart';
 
 final router = GoRouter(
   initialLocation: Routes.home,
+  redirect: _redirect,
   routes: [
     StatefulShellRoute.indexedStack(
-      // TODO: check User Auth i.e userSignedin ? ScaffolScaffoldWithBottomNavBar(navigationShell: navShell) : signInScreen()
       builder: (context, state, navShell) =>
           ScaffoldWithBottomNavBar(navigationShell: navShell),
       branches: [
@@ -83,3 +84,14 @@ final router = GoRouter(
     ),
   ],
 );
+
+Future<String?> _redirect(BuildContext context, GoRouterState state) async {
+  final bool isloggedIn = context.read<UserAuthentication>().user != null;
+
+  if (!isloggedIn) {
+    // If the user is not logged in, redirect to the login page
+    return Routes.login;
+  }
+  // If the user is logged in, allow access to the requested page
+  return null;
+}

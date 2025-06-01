@@ -5,6 +5,9 @@ abstract class Routes {
   static const exercises = '/exercises';
   static const reports = '/reports';
   static const settings = '/settings';
+  static const login = '/login';
+  static const register = '/signup';
+  static const profile = '/profile';
 }
 
 abstract class SubRoutes {

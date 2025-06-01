@@ -6,7 +6,17 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+        //  context.watch<UserAuthentication>().user == null
+        //     ? Scaffold(
+        //         body: Center(
+        //           child: Text(
+        //             "Please log in to access the app",
+        //             style: Theme.of(context).textTheme.headlineMedium,
+        //           ),
+        //         ),
+        //       ) :
+        Scaffold(
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         destinations: const [
