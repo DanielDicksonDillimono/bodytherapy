@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'package:bodytherapy/ui/main_pages/exercises/view_models/exercise_library_viewmodel.dart';
-import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_library.dart';
+import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_library_page.dart';
 import 'package:bodytherapy/ui/main_pages/home/view_models/home_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/preferences/view_models/preferences_model.dart';
 import 'package:bodytherapy/ui/main_pages/preferences/widgets/preferences_page.dart';

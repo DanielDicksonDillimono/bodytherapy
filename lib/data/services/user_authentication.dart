@@ -36,7 +36,7 @@ class UserAuthentication extends ChangeNotifier {
   }
 
   Future<void> createUserWithEmailAndPassword(
-      String email, String password) async {
+      {required String email, required String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
