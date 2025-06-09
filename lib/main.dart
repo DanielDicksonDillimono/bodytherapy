@@ -1,8 +1,10 @@
 import 'package:bodytherapy/navigation/router.dart';
+import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'config/dependencies.dart' as my_dependencies;
 
 void main() async {
@@ -36,6 +38,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        AppLocalizationDelegate(),
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('es'),
+        Locale('nl'),
+        Locale('de'),
+      ],
       routerConfig: router,
       themeMode: ThemeMode.system,
     );

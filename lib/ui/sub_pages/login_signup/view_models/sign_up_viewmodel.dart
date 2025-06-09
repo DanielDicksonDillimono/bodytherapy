@@ -4,6 +4,8 @@ import 'package:bodytherapy/data/services/user_authentication.dart';
 class SignUpViewmodel extends ChangeNotifier {
   SignUpViewmodel(this.userAuthentication);
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final UserAuthentication userAuthentication;
 

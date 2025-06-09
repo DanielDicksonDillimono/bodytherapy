@@ -1,4 +1,7 @@
 import 'package:bodytherapy/data/services/user_authentication.dart';
+import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/sign_up_viewmodel.dart';
+import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/login_page.dart';
+import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +22,18 @@ final router = GoRouter(
   initialLocation: Routes.home,
   redirect: _redirect,
   routes: [
+    GoRoute(
+        path: Routes.login,
+        builder: (context, state) {
+          return LoginPage();
+        }),
+    GoRoute(
+        path: Routes.signUp,
+        builder: (context, state) {
+          return SignUpPage(
+            signUpViewModel: SignUpViewmodel(context.read()),
+          );
+        }),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navShell) =>
           ScaffoldWithBottomNavBar(navigationShell: navShell),
