@@ -15,7 +15,7 @@ class AppLocalization {
     'reports': 'Reports',
     'preferences': 'Preferences',
     'login_message': 'Please login to continue',
-    'sign_up_message': 'Create an account to get started',
+    'sign_up_message': 'Create Account',
     'email': 'Email',
     'password': 'Password',
     'confirm_password': 'Confirm Password',
@@ -28,6 +28,7 @@ class AppLocalization {
     'light_mode': 'Light Mode',
     'enter_email': 'Enter your email',
     'enter_password': 'Enter your password',
+    'sign_up_error': 'Sign Up Error',
   };
 
 //in case the key is not found, it will return the key itself
@@ -61,6 +62,7 @@ class AppLocalization {
   String get enterEmailOrPassword => _get('enter_email_or_password');
   String get enterValidEmail => _get('enter_valid_email');
   String get enterValidPassword => _get('enter_valid_password');
+  String get signUpError => _get('sign_up_error');
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

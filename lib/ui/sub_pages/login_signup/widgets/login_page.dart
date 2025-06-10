@@ -1,8 +1,13 @@
+import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:bodytherapy/ui/core/ui_shared_elements/shared_elements.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/login_viewmodel.dart';
+
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  const LoginPage({required this.loginViewModel, super.key});
+
+  final LoginViewModel loginViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +57,18 @@ class LoginPage extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () {},
-                          child: Text("Forgot Password?"),
+                          child:
+                              Text(AppLocalization.of(context).forgotPassword),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text("Create account"),
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () =>
+                                loginViewModel.goToSignUpPage(context),
+                            child: Text(
+                              AppLocalization.of(context).signUpMessage,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ),
                       ],
                     ),

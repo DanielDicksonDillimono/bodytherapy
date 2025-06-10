@@ -1,5 +1,6 @@
 import 'package:bodytherapy/navigation/router.dart';
 import 'package:bodytherapy/ui/core/localization/applocalization.dart';
+import 'package:bodytherapy/ui/core/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -51,6 +52,8 @@ class MyApp extends StatelessWidget {
         Locale('de'),
       ],
       routerConfig: router,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
     );
   }

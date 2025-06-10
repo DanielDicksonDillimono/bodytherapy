@@ -30,8 +30,8 @@ abstract final class AppColors {
     onPrimary: black1,
     secondary: warmYellow,
     onSecondary: black1,
-    surface: grey2,
-    onSurface: white1,
+    surface: grey1, // this affects the background color of ElevatedButtons
+    onSurface: grey3,
     error: brightRed,
     onError: black1,
   );

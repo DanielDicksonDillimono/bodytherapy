@@ -1,4 +1,5 @@
 import 'package:bodytherapy/data/services/user_authentication.dart';
+import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/login_viewmodel.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/sign_up_viewmodel.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/login_page.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/sign_up_page.dart';
@@ -25,7 +26,7 @@ final router = GoRouter(
     GoRoute(
         path: Routes.login,
         builder: (context, state) {
-          return LoginPage();
+          return LoginPage(loginViewModel: LoginViewModel(context.read()));
         }),
     GoRoute(
         path: Routes.signUp,
@@ -102,10 +103,10 @@ final router = GoRouter(
 
 Future<String?> _redirect(BuildContext context, GoRouterState state) async {
   final bool isloggedIn = context.read<UserAuthentication>().user != null;
-
   if (!isloggedIn) {
     // If the user is not logged in, redirect to the login page
-    return Routes.login;
+
+    return state.fullPath == Routes.signUp ? Routes.signUp : Routes.login;
   }
   // If the user is logged in, allow access to the requested page
   return null;
