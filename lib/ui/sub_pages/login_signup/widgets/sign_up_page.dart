@@ -1,3 +1,4 @@
+import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/sign_up_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,11 @@ class SignUpPage extends StatelessWidget {
                 children: [
                   Text("Sign Up Page"),
                   TextFormField(
-                      decoration: InputDecoration(labelText: "Email"),
+                      decoration: InputDecoration(
+                          labelText: AppLocalization.of(context).email),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) => value == null || value.isEmpty
-                          ? "Please enter your email"
+                          ? AppLocalization.of(context).enterValidEmail
                           : null),
                   TextFormField(
                     decoration: InputDecoration(labelText: "Password"),

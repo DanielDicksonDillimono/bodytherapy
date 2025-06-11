@@ -11,31 +11,25 @@ class LoginViewModel extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future<String?> login(String email, String password) async {
-    String? message;
+  Future login(BuildContext context) async {
+    String message;
     try {
-      if (formKey.currentState?.validate() ?? false) {
+      if (formKey.currentState?.validate() == true) {
         await userAuthenticationService.signInWithEmailAndPassword(
-            email, password);
-        // Navigate to the home page or another page after successful login
+            emailController.text, passwordController.text);
       }
     } catch (e) {
-      // Handle login error, e.g., show a snackbar or dialog
       message = e.toString();
+      context.mounted ? showErrorMessage(context, message) : null;
     }
     notifyListeners();
-    return message;
   }
 
   Future<void> logout() async {
-    // Implement your logout logic here
-    // For example, clear user session or token.
     notifyListeners();
   }
 
   Future<void> resetPassword(String email) async {
-    // Implement your password reset logic here
-    // For example, send a password reset email.
     notifyListeners();
   }
 
@@ -48,7 +42,7 @@ class LoginViewModel extends ChangeNotifier {
   void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('An error occurred. Please try again.'),
+        content: Text('An error occurred: $message. Please try again.'),
       ),
     );
   }

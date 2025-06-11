@@ -29,6 +29,9 @@ class AppLocalization {
     'enter_email': 'Enter your email',
     'enter_password': 'Enter your password',
     'sign_up_error': 'Sign Up Error',
+    'login_button_text': 'Login',
+    'email_validation': 'Please enter a valid email',
+    'enter_confirm_password': 'Confirm your password',
   };
 
 //in case the key is not found, it will return the key itself
@@ -60,9 +63,11 @@ class AppLocalization {
   String get enterPassword => _get('enter_password');
   String get enterConfirmPassword => _get('confirm_password');
   String get enterEmailOrPassword => _get('enter_email_or_password');
-  String get enterValidEmail => _get('enter_valid_email');
+  String get enterValidEmail => _get('email_validation');
   String get enterValidPassword => _get('enter_valid_password');
   String get signUpError => _get('sign_up_error');
+  String get loginButtonText => _get('login_button_text');
+  String get signUpButtonText => _get('sign_up_button_text');
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
