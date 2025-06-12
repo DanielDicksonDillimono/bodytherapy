@@ -1,5 +1,7 @@
 import 'package:bodytherapy/data/services/user_authentication.dart';
 import 'package:bodytherapy/navigation/routes.dart';
+import 'package:bodytherapy/ui/core/localization/applocalization.dart';
+import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,18 +13,24 @@ class LoginViewModel extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool isLoading = false;
+  bool isPasswordVisible = false;
+
   Future login(BuildContext context) async {
     String message;
     try {
       if (formKey.currentState?.validate() == true) {
+        isLoading = true;
         await userAuthenticationService.signInWithEmailAndPassword(
             emailController.text, passwordController.text);
       }
     } catch (e) {
       message = e.toString();
       context.mounted ? showErrorMessage(context, message) : null;
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   Future<void> logout() async {
@@ -42,7 +50,7 @@ class LoginViewModel extends ChangeNotifier {
   void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('An error occurred: $message. Please try again.'),
+        content: Text(AppLocalization.of(context).defaultError(message)),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:flutter/material.dart';
 import 'package:bodytherapy/data/services/user_authentication.dart';
 
@@ -12,7 +13,7 @@ class SignUpViewmodel extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
-  Future<void> signUp() async {
+  Future<void> signUp(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
@@ -22,11 +23,31 @@ class SignUpViewmodel extends ChangeNotifier {
           password: passwordController.text.trim(),
         );
       } catch (e) {
-        print('Sign up failed: $e');
+        String message = e.toString().trim();
+        context.mounted ? showErrorMessage(context, message) : null;
       } finally {
         isLoading = false;
         notifyListeners();
       }
     }
+  }
+
+  String? validateEmail(String? value, BuildContext context) {
+    if (value == null || value.isEmpty) {
+      return AppLocalization.of(context).enterValidEmail;
+    }
+    final emailRegex = RegExp(AppLocalization.of(context).emailRegex);
+    if (!emailRegex.hasMatch(value)) {
+      return AppLocalization.of(context).enterValidEmail;
+    }
+    return null;
+  }
+
+  void showErrorMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(AppLocalization.of(context).defaultError(message)),
+      ),
+    );
   }
 }

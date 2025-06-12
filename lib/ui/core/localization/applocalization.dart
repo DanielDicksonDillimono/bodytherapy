@@ -68,6 +68,10 @@ class AppLocalization {
   String get signUpError => _get('sign_up_error');
   String get loginButtonText => _get('login_button_text');
   String get signUpButtonText => _get('sign_up_button_text');
+  String defaultError(String message) =>
+      '$message An error occurred. Please try again.';
+
+  String get emailRegex => r'^[^@]+@[^@]+\.[^@]+';
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

@@ -2,6 +2,7 @@ import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/sign_up_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({required this.signUpViewModel, super.key});
@@ -11,6 +12,15 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalization.of(context).signUp),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -20,7 +30,6 @@ class SignUpPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Sign Up Page"),
                   TextFormField(
                       decoration: InputDecoration(
                           labelText: AppLocalization.of(context).email),
@@ -47,7 +56,7 @@ class SignUpPage extends StatelessWidget {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      signUpViewModel.signUp();
+                      signUpViewModel.signUp(context);
                     },
                     child: Text("Sign Up"),
                   ),
