@@ -1,14 +1,19 @@
+import 'package:bodytherapy/data/database/database_service.dart';
+import 'package:bodytherapy/navigation/routes.dart';
 import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:flutter/material.dart';
 import 'package:bodytherapy/data/services/user_authentication.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpViewmodel extends ChangeNotifier {
-  SignUpViewmodel(this.userAuthentication);
+  SignUpViewmodel(this.userAuthentication, this.databaseService);
   final TextEditingController emailController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final UserAuthentication userAuthentication;
+  final DatabaseService databaseService;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
@@ -22,6 +27,15 @@ class SignUpViewmodel extends ChangeNotifier {
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
+        if (userAuthentication.currentUser() != null) {
+          final data = {
+            'email': emailController.text.trim(),
+            'name': nameController.text.trim(),
+            'createdAt': DateTime.now().toIso8601String(),
+          };
+          databaseService.createUser(
+              userAuthentication.currentUser()!.uid, data);
+        }
       } catch (e) {
         String message = e.toString().trim();
         context.mounted ? showErrorMessage(context, message) : null;
@@ -41,6 +55,10 @@ class SignUpViewmodel extends ChangeNotifier {
       return AppLocalization.of(context).enterValidEmail;
     }
     return null;
+  }
+
+  void goToLoginPage(BuildContext context) {
+    context.go(Routes.login);
   }
 
   void showErrorMessage(BuildContext context, String message) {

@@ -1,3 +1,4 @@
+import 'package:bodytherapy/ui/core/loading.dart';
 import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:bodytherapy/ui/core/ui_shared_elements/shared_elements.dart';
@@ -16,67 +17,83 @@ class LoginPage extends StatelessWidget {
       onTap: dismissKeyboard(context),
       child: Scaffold(
         body: SafeArea(
-          child: Center(
-            child: Form(
-              key: loginViewModel.formKey,
-              child: Container(
-                padding: Dimens.of(context).edgeInsetsScreenSymmetric,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: AppLocalization.of(context).email,
-                        icon: Icon(Icons.email),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) => value == null || value.isEmpty
-                          ? AppLocalization.of(context).enterValidEmail
-                          : null,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: AppLocalization.of(context).password,
-                        icon: Icon(Icons.lock),
-                      ),
-                      obscureText: true,
-                      validator: (value) => value == null || value.isEmpty
-                          ? AppLocalization.of(context).enterPassword
-                          : null,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20, bottom: 20),
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () => loginViewModel.login(context),
-                        child:
-                            Text(AppLocalization.of(context).loginButtonText),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child:
-                              Text(AppLocalization.of(context).forgotPassword),
-                        ),
-                        Expanded(
-                          child: TextButton(
-                            onPressed: () =>
-                                loginViewModel.goToSignUpPage(context),
-                            child: Text(
-                              AppLocalization.of(context).signUpMessage,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+          child: ListenableBuilder(
+            listenable: loginViewModel,
+            builder: (context, child) => loginViewModel.isLoading
+                ? const Loading()
+                : Center(
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: loginViewModel.formKey,
+                        child: Container(
+                          padding: Dimens.of(context).edgeInsetsScreenSymmetric,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextFormField(
+                                controller: loginViewModel.emailController,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalization.of(context).email,
+                                  icon: Icon(Icons.email),
+                                ),
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) =>
+                                    value == null || value.isEmpty
+                                        ? AppLocalization.of(context)
+                                            .enterValidEmail
+                                        : null,
+                              ),
+                              TextFormField(
+                                controller: loginViewModel.passwordController,
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalization.of(context).password,
+                                  icon: Icon(Icons.lock),
+                                ),
+                                obscureText: true,
+                                validator: (value) => value == null ||
+                                        value.isEmpty
+                                    ? AppLocalization.of(context).enterPassword
+                                    : null,
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 20, bottom: 20),
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: () =>
+                                      loginViewModel.login(context),
+                                  child: Text(AppLocalization.of(context)
+                                      .loginButtonText),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(AppLocalization.of(context)
+                                        .forgotPassword),
+                                  ),
+                                  Expanded(
+                                    child: TextButton(
+                                      onPressed: () => loginViewModel
+                                          .goToSignUpPage(context),
+                                      child: Text(
+                                        AppLocalization.of(context)
+                                            .signUpMessage,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
           ),
         ),
       ),

@@ -5,33 +5,41 @@ class UserAuthentication extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth;
   UserAuthentication(this._firebaseAuth);
 
-  User? user;
+  User? _user;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  Future<User?> getCurrentUser() async {
-    User? user = _firebaseAuth.currentUser;
-    return user;
+  User? currentUser() => _user;
+  bool initialLogin = false;
+
+  void setInitialLogin(bool value) {
+    initialLogin = value;
   }
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      user = _firebaseAuth.currentUser;
-      notifyListeners();
+      _user = _firebaseAuth.currentUser;
+      initialLogin = true;
     } on FirebaseAuthException catch (e) {
-      throw Exception('Failed to sign in: $e');
+      throw Exception(e.message);
+    } finally {
+      _user = _firebaseAuth.currentUser;
+      notifyListeners();
     }
   }
 
   Future<void> signOut() async {
     try {
       await _firebaseAuth.signOut();
-      user = _firebaseAuth.currentUser;
+      _user = _firebaseAuth.currentUser;
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      throw Exception('Failed to sign out: $e');
+      throw Exception(e.message);
+    } finally {
+      _user = null;
+      notifyListeners();
     }
   }
 
@@ -41,7 +49,10 @@ class UserAuthentication extends ChangeNotifier {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      throw Exception('Failed to create user: $e');
+      throw Exception(e.message);
+    } finally {
+      _user = _firebaseAuth.currentUser;
+      notifyListeners();
     }
   }
 
@@ -49,7 +60,7 @@ class UserAuthentication extends ChangeNotifier {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw Exception('Failed to reset password: $e');
+      throw Exception(e.message);
     }
   }
 
@@ -59,7 +70,7 @@ class UserAuthentication extends ChangeNotifier {
       try {
         await user.delete();
       } on FirebaseAuthException catch (e) {
-        throw Exception('Failed to delete user: $e');
+        throw Exception(e.message);
       }
     } else {
       throw Exception('No user is currently signed in.');

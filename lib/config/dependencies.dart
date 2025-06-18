@@ -1,9 +1,14 @@
+import 'package:bodytherapy/data/repositories/exercises_repository.dart';
 import 'package:bodytherapy/data/services/user_authentication.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import '../data/repositories/user_repository.dart';
-import '../data/repositories/reports_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:bodytherapy/data/repositories/user_repository.dart';
+import 'package:bodytherapy/data/repositories/reports_repository.dart';
+
+import 'package:bodytherapy/data/database/database_service.dart';
 
 List<SingleChildWidget> providers = [
   ChangeNotifierProvider(
@@ -14,6 +19,12 @@ List<SingleChildWidget> providers = [
   Provider(
     create: (context) => ReportsRepository(),
   ),
+  Provider(
+    create: (context) => ExercisesRepository(),
+  ),
+  Provider(
+    create: (context) => DatabaseService(FirebaseFirestore.instance),
+  )
   // Provider(
   //   create: (context) => S,
   // )

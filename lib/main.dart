@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         Locale('nl'),
         Locale('de'),
       ],
-      routerConfig: router,
+      routerConfig: router(context.read()),
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,

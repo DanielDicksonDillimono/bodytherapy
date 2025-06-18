@@ -1,7 +1,6 @@
 import 'package:bodytherapy/data/services/user_authentication.dart';
 import 'package:bodytherapy/navigation/routes.dart';
 import 'package:bodytherapy/ui/core/localization/applocalization.dart';
-import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,16 +31,6 @@ class LoginViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  Future<void> logout() async {
-    notifyListeners();
-  }
-
-  Future<void> resetPassword(String email) async {
-    notifyListeners();
-  }
-
-  void signUp(String email, String password) async {}
 
   void goToSignUpPage(BuildContext context) {
     context.go(Routes.signUp);

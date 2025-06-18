@@ -17,97 +17,103 @@ import 'package:bodytherapy/ui/main_pages/reports/widgets/reports_page.dart';
 
 import 'routes.dart';
 import 'scaffold_with_bottom_nav_bar.dart';
-import '../ui/main_pages/home/widgets/home_page.dart';
+import 'package:bodytherapy/ui/main_pages/home/widgets/home_page.dart';
 
-final router = GoRouter(
-  initialLocation: Routes.home,
-  redirect: _redirect,
-  routes: [
-    GoRoute(
-        path: Routes.login,
-        builder: (context, state) {
-          return LoginPage(loginViewModel: LoginViewModel(context.read()));
-        }),
-    GoRoute(
-        path: Routes.signUp,
-        builder: (context, state) {
-          return SignUpPage(
-            signUpViewModel: SignUpViewmodel(context.read()),
-          );
-        }),
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navShell) =>
-          ScaffoldWithBottomNavBar(navigationShell: navShell),
-      branches: [
-        //home tab branch
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.home,
-              builder: (BuildContext context, GoRouterState state) => HomePage(
-                viewModel: HomeViewModel(
-                    reportsRepository: context.read(),
-                    userRepository: context.read()),
-              ),
-            ),
-          ],
-        ),
-
-        //Reports tab branch
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.reports,
-              builder: (BuildContext context, GoRouterState state) =>
-                  ReportsPage(
-                reportsViewmodel: ReportsViewmodel(
-                  reportsRepository: context.read(),
-                  userRepository: context.read(),
+GoRouter router(UserAuthentication userAuthentication) => GoRouter(
+      initialLocation: Routes.home,
+      redirect: _redirect,
+      refreshListenable: userAuthentication,
+      routes: [
+        GoRoute(
+            path: Routes.login,
+            builder: (context, state) {
+              return LoginPage(loginViewModel: LoginViewModel(context.read()));
+            }),
+        GoRoute(
+            path: Routes.signUp,
+            builder: (context, state) {
+              return SignUpPage(
+                signUpViewModel:
+                    SignUpViewmodel(context.read(), context.read()),
+              );
+            }),
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, navShell) {
+            return ScaffoldWithBottomNavBar(navigationShell: navShell);
+          },
+          branches: [
+            //home tab branch
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Routes.home,
+                  builder: (BuildContext context, GoRouterState state) =>
+                      HomePage(
+                    viewModel: HomeViewModel(
+                        reportsRepository: context.read(),
+                        userRepository: context.read()),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
 
-        //Exercises tab branch
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.exercises,
-              builder: (BuildContext context, GoRouterState state) =>
-                  ExerciseLibraryPage(
-                exerciseLibraryModel: ExerciseLibraryViewModel(
-                  exerciseRepository: context.read(),
+            //Reports tab branch
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Routes.reports,
+                  builder: (BuildContext context, GoRouterState state) =>
+                      ReportsPage(
+                    reportsViewmodel: ReportsViewmodel(
+                      reportsRepository: context.read(),
+                      userRepository: context.read(),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
 
-        //Preferences tab branch
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.settings,
-              builder: (BuildContext context, GoRouterState state) =>
-                  PreferencesPage(
-                preferencesModel: PreferencesModel(),
-              ),
+            //Exercises tab branch
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Routes.exercises,
+                  builder: (BuildContext context, GoRouterState state) =>
+                      ExerciseLibraryPage(
+                    exerciseLibraryModel: ExerciseLibraryViewModel(
+                      exerciseRepository: context.read(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            //Preferences tab branch
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Routes.settings,
+                  builder: (BuildContext context, GoRouterState state) =>
+                      PreferencesPage(
+                    preferencesModel: PreferencesModel(
+                        userAuthenticationService: context.read()),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ],
-    ),
-  ],
-);
+    );
 
 Future<String?> _redirect(BuildContext context, GoRouterState state) async {
-  final bool isloggedIn = context.read<UserAuthentication>().user != null;
+  final bool isloggedIn =
+      context.read<UserAuthentication>().currentUser() != null;
   if (!isloggedIn) {
-    // If the user is not logged in, redirect to the login page
-
     return state.fullPath == Routes.signUp ? Routes.signUp : Routes.login;
   }
-  // If the user is logged in, allow access to the requested page
+  if (isloggedIn && state.fullPath == Routes.login) {
+    return Routes.home;
+  }
   return null;
 }

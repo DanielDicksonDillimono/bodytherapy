@@ -9,6 +9,7 @@ class AppLocalization {
     'app_name': 'Body Therapy',
     'welcome_message': 'Welcome to Body Therapy',
     'login': 'Login',
+    'name': 'Name',
     'sign_up': 'Sign Up',
     'home': 'Home',
     'exercises': 'Exercises',
@@ -32,6 +33,8 @@ class AppLocalization {
     'login_button_text': 'Login',
     'email_validation': 'Please enter a valid email',
     'enter_confirm_password': 'Confirm your password',
+    'enter_valid_name': 'Please enter a valid name',
+    'sign_up_failed': 'Sign Up Failed',
   };
 
 //in case the key is not found, it will return the key itself
@@ -42,6 +45,7 @@ class AppLocalization {
   String get appName => _get('app_name');
   String get welcomeMessage => _get('welcome_message');
   String get login => _get('login');
+  String get name => _get('name');
   String get signUp => _get('sign_up');
   String get home => _get('home');
   String get exercises => _get('exercises');
@@ -68,6 +72,8 @@ class AppLocalization {
   String get signUpError => _get('sign_up_error');
   String get loginButtonText => _get('login_button_text');
   String get signUpButtonText => _get('sign_up_button_text');
+  String get enterValidName => _get('enter_valid_name');
+  String get signUpFailed => _get('key_sign_up_failed');
   String defaultError(String message) =>
       '$message An error occurred. Please try again.';
 
