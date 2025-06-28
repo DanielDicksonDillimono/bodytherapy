@@ -32,6 +32,11 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
+  void toggleObscure() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+  }
+
   void goToSignUpPage(BuildContext context) {
     context.go(Routes.signUp);
   }

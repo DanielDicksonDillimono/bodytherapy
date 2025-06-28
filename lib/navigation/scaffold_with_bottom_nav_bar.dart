@@ -12,7 +12,7 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.face), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.folder), label: 'Reports'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Exercises'),
+          // NavigationDestination(icon: Icon(Icons.person), label: 'Exercises'),
           NavigationDestination(
               icon: Icon(Icons.settings), label: 'Preferences')
         ],

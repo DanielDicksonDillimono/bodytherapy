@@ -45,12 +45,21 @@ class LoginPage extends StatelessWidget {
                               ),
                               TextFormField(
                                 controller: loginViewModel.passwordController,
+                                obscureText: loginViewModel.isPasswordVisible,
                                 decoration: InputDecoration(
                                   labelText:
                                       AppLocalization.of(context).password,
                                   icon: Icon(Icons.lock),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      loginViewModel.isPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                    onPressed: () =>
+                                        loginViewModel.toggleObscure(),
+                                  ),
                                 ),
-                                obscureText: true,
                                 validator: (value) => value == null ||
                                         value.isEmpty
                                     ? AppLocalization.of(context).enterPassword

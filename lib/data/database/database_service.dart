@@ -1,9 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
-  final FirebaseFirestore _firestore;
+  //TODO: Make User nullable i.e User? _user;, then for each function,
+  //there should be a String userId = ' '. If the userId parameter is passed and it is not empty,
+  //use that userId, otherwise use _user.uid. This way we can use the same DatabaseService for both
+  //authenticated and unauthenticated users or for a different user.
+  //This is useful for "admin" functionalities where we need to access other users' data.
 
-  DatabaseService(this._firestore);
+  final FirebaseFirestore _firestore;
+  final User _user;
+
+  DatabaseService(this._firestore, this._user);
 
   var usersCollection = FirebaseFirestore.instance.collection('users');
 
@@ -15,26 +23,26 @@ class DatabaseService {
     }
   }
 
-  Future<void> createReport(String userId, Map<String, dynamic> data) async {
+  Future<void> createReport(Map<String, dynamic> data) async {
     try {
-      await usersCollection.doc(userId).collection('reports').add(data);
+      await usersCollection.doc(_user.uid).collection('reports').add(data);
     } catch (e) {
       throw Exception('Failed to create report: $e');
     }
   }
 
-  Future<void> updateUser(String userId, Map<String, dynamic> data) async {
+  Future<void> updateUser(Map<String, dynamic> data) async {
     try {
-      await _firestore.collection('users').doc(userId).update(data);
+      await _firestore.collection('users').doc(_user.uid).update(data);
     } catch (e) {
       throw Exception('Failed to update user: $e');
     }
   }
 
-  Future<List<Map<String, dynamic>>> getReports(String userId) async {
+  Future<List<Map<String, dynamic>>> getReports() async {
     try {
       QuerySnapshot snapshot =
-          await usersCollection.doc(userId).collection('reports').get();
+          await usersCollection.doc(_user.uid).collection('reports').get();
       return snapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
@@ -53,11 +61,10 @@ class DatabaseService {
     }
   }
 
-  Future updateReport(
-      String userId, String reportId, Map<String, dynamic> data) async {
+  Future updateReport(String reportId, Map<String, dynamic> data) async {
     try {
       await usersCollection
-          .doc(userId)
+          .doc(_user.uid)
           .collection('reports')
           .doc(reportId)
           .update(data);
@@ -66,10 +73,10 @@ class DatabaseService {
     }
   }
 
-  Future<void> deleteReport(String userId, String reportId) async {
+  Future<void> deleteReport(String reportId) async {
     try {
       await usersCollection
-          .doc(userId)
+          .doc(_user.uid)
           .collection('reports')
           .doc(reportId)
           .delete();
@@ -78,9 +85,9 @@ class DatabaseService {
     }
   }
 
-  Future<void> deleteUser(String userId) async {
+  Future<void> deleteUser() async {
     try {
-      await _firestore.collection('users').doc(userId).delete();
+      await _firestore.collection('users').doc(_user.uid).delete();
     } catch (e) {
       throw Exception('Failed to delete user: $e');
     }

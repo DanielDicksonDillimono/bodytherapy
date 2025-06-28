@@ -107,8 +107,9 @@ GoRouter router(UserAuthentication userAuthentication) => GoRouter(
     );
 
 Future<String?> _redirect(BuildContext context, GoRouterState state) async {
-  final bool isloggedIn =
-      context.read<UserAuthentication>().currentUser() != null;
+  // final bool isloggedIn =
+  //     context.read<UserAuthentication>().currentUser() != null;
+  final bool isloggedIn = true;
   if (!isloggedIn) {
     return state.fullPath == Routes.signUp ? Routes.signUp : Routes.login;
   }

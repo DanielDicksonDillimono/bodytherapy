@@ -11,35 +11,54 @@ abstract final class AppTheme {
     labelSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
   );
 
+  // static ThemeData lightTheme = ThemeData(
+  //   useMaterial3: true,
+  //   colorScheme: AppColors.lightColorScheme,
+  //   scaffoldBackgroundColor: AppColors.grey1,
+  //   appBarTheme: const AppBarTheme(
+  //     backgroundColor: AppColors.grey1,
+  //     foregroundColor: AppColors.black1,
+  //     elevation: 0,
+  //   ),
+  //   textTheme: const TextTheme(
+  //     bodyLarge: TextStyle(color: AppColors.black1),
+  //     bodyMedium: TextStyle(color: AppColors.black1),
+  //     bodySmall: TextStyle(color: AppColors.black1),
+  //   ),
+  // );
   static ThemeData lightTheme = ThemeData(
+    //brightness: Brightness.light,
     useMaterial3: true,
-    colorScheme: AppColors.lightColorScheme,
-    scaffoldBackgroundColor: AppColors.grey1,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.grey1,
-      foregroundColor: AppColors.black1,
-      elevation: 0,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: AppColors.black1),
-      bodyMedium: TextStyle(color: AppColors.black1),
-      bodySmall: TextStyle(color: AppColors.black1),
+    textTheme: AppTheme.textTheme,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Color(0xFF00BFFF),
+      brightness: Brightness.light,
     ),
   );
 
   static ThemeData darkTheme = ThemeData(
+    //brightness: Brightness.dark,
     useMaterial3: true,
-    colorScheme: AppColors.darkColorScheme,
-    scaffoldBackgroundColor: AppColors.grey2,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.grey2,
-      foregroundColor: AppColors.white1,
-      elevation: 0,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: AppColors.white1),
-      bodyMedium: TextStyle(color: AppColors.white1),
-      bodySmall: TextStyle(color: AppColors.white1),
+    textTheme: AppTheme.textTheme,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.grey2,
+      brightness: Brightness.dark,
     ),
   );
+
+  // static ThemeData darkTheme = ThemeData(
+  //   useMaterial3: true,
+  //   colorScheme: AppColors.darkColorScheme,
+  //   scaffoldBackgroundColor: AppColors.grey2,
+  //   appBarTheme: const AppBarTheme(
+  //     backgroundColor: AppColors.grey2,
+  //     foregroundColor: AppColors.white1,
+  //     elevation: 0,
+  //   ),
+  //   textTheme: const TextTheme(
+  //     bodyLarge: TextStyle(color: AppColors.white1),
+  //     bodyMedium: TextStyle(color: AppColors.white1),
+  //     bodySmall: TextStyle(color: AppColors.white1),
+  //   ),
+  // );
 }

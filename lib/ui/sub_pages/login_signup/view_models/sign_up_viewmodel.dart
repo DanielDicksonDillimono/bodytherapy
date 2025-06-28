@@ -19,30 +19,29 @@ class SignUpViewmodel extends ChangeNotifier {
   bool isLoading = false;
 
   Future<void> signUp(BuildContext context) async {
-    if (formKey.currentState!.validate()) {
-      isLoading = true;
-      notifyListeners();
-      try {
-        await userAuthentication.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        );
-        if (userAuthentication.currentUser() != null) {
-          final data = {
-            'email': emailController.text.trim(),
-            'name': nameController.text.trim(),
-            'createdAt': DateTime.now().toIso8601String(),
-          };
-          databaseService.createUser(
-              userAuthentication.currentUser()!.uid, data);
-        }
-      } catch (e) {
-        String message = e.toString().trim();
-        context.mounted ? showErrorMessage(context, message) : null;
-      } finally {
-        isLoading = false;
-        notifyListeners();
+    if (!formKey.currentState!.validate()) return;
+
+    isLoading = true;
+    notifyListeners();
+    try {
+      await userAuthentication.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      if (userAuthentication.currentUser() != null) {
+        final data = {
+          'email': emailController.text.trim(),
+          'name': nameController.text.trim(),
+          'createdAt': DateTime.now().toIso8601String(),
+        };
+        databaseService.createUser(userAuthentication.currentUser()!.uid, data);
       }
+    } catch (e) {
+      String message = e.toString().trim();
+      context.mounted ? showErrorMessage(context, message) : null;
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
 

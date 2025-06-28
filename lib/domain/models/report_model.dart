@@ -1,25 +1,37 @@
 class Report {
-  Report(
-      {required String reporterId,
-      required String assignedCareTakerId,
-      required String description,
-      required DateTime reportedDate,
-      required List<String> prescribedExercisesIds})
-      : _reporterId = reporterId,
-        _assignedCareTakerId = "",
-        _description = description,
+  Report({
+    required String name,
+    required String description,
+    required DateTime reportedDate,
+    required AffectedArea affectedArea,
+    List<String> prescribedExercisesIds = const [],
+  })  : _description = description,
         _reportedDate = reportedDate,
-        _prescribedExercisesIds = prescribedExercisesIds;
+        _prescribedExercisesIds = prescribedExercisesIds,
+        _name = name,
+        _affectedArea = affectedArea;
 
-  final String _reporterId;
-  final String _assignedCareTakerId;
+  final String _name;
   final String _description;
   final DateTime _reportedDate;
   final List<String> _prescribedExercisesIds;
+  final AffectedArea _affectedArea;
 
-  String get reporterId => _reporterId;
-  String get assignedCareTakerId => _assignedCareTakerId;
   String get description => _description;
   DateTime get reportedDate => _reportedDate;
+  String get name => _name;
+  AffectedArea get affectedArea => _affectedArea;
   List<String> get prescribedExercisesIds => _prescribedExercisesIds;
+}
+
+enum AffectedArea {
+  head,
+  neck,
+  back,
+  chest,
+  abdomen,
+  arms,
+  legs,
+  feet,
+  other,
 }

@@ -10,6 +10,16 @@ abstract final class Dimens {
   /// General vertical padding used to separate UI items
   static const paddingVertical = 24.0;
 
+  static const paddingCard = 16.0;
+  static const paddingCardHorizontal = 12.0;
+  static const paddingCardVertical = 8.0;
+  static const paddingButton = 12.0;
+  static const paddingButtonHorizontal = 16.0;
+  static const paddingButtonVertical = 8.0;
+  static const paddingTextField = 12.0;
+  static const textCardHeightFactor = 0.1;
+  static const textCardWidthFactor = 0.2;
+
   /// Horizontal padding for screen edges
   double get paddingScreenHorizontal;
 
@@ -21,6 +31,12 @@ abstract final class Dimens {
   /// Horizontal symmetric padding for screen edges
   EdgeInsets get edgeInsetsScreenHorizontal =>
       EdgeInsets.symmetric(horizontal: paddingScreenHorizontal);
+
+  static double textCardHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height * textCardHeightFactor;
+
+  static double textCardWidth(BuildContext context) =>
+      MediaQuery.of(context).size.height * textCardWidthFactor;
 
   /// Symmetric padding for screen edges
   EdgeInsets get edgeInsetsScreenSymmetric => EdgeInsets.symmetric(

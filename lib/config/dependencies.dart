@@ -1,4 +1,5 @@
 import 'package:bodytherapy/data/repositories/exercises_repository.dart';
+import 'package:bodytherapy/data/services/ai_service.dart';
 import 'package:bodytherapy/data/services/user_authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -17,13 +18,17 @@ List<SingleChildWidget> providers = [
     create: (context) => UserRepository(),
   ),
   Provider(
-    create: (context) => ReportsRepository(),
+    create: (context) => ReportsRepository(
+        aiService: AiService(),
+        databaseService: DatabaseService(
+            FirebaseFirestore.instance, FirebaseAuth.instance.currentUser!)),
   ),
   Provider(
     create: (context) => ExercisesRepository(),
   ),
   Provider(
-    create: (context) => DatabaseService(FirebaseFirestore.instance),
+    create: (context) => DatabaseService(
+        FirebaseFirestore.instance, FirebaseAuth.instance.currentUser!),
   )
   // Provider(
   //   create: (context) => S,

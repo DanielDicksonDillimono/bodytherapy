@@ -35,6 +35,7 @@ class AppLocalization {
     'enter_confirm_password': 'Confirm your password',
     'enter_valid_name': 'Please enter a valid name',
     'sign_up_failed': 'Sign Up Failed',
+    'create_report': 'Create Report',
   };
 
 //in case the key is not found, it will return the key itself
@@ -74,6 +75,8 @@ class AppLocalization {
   String get signUpButtonText => _get('sign_up_button_text');
   String get enterValidName => _get('enter_valid_name');
   String get signUpFailed => _get('key_sign_up_failed');
+  String get createReport => _get('Create Report');
+
   String defaultError(String message) =>
       '$message An error occurred. Please try again.';
 
