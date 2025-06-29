@@ -34,6 +34,28 @@ class ReportCreationViewmodel extends ChangeNotifier {
     }
   }
 
+  Future<void> previewReport(BuildContext context) async {
+    if (!formKey.currentState!.validate()) return;
+    try {
+      final report = Report(
+        name: nameController.text.trim(),
+        description: descriptionController.text.trim(),
+        affectedArea: selectedArea,
+        reportedDate: DateTime.now(),
+      );
+      // Navigate to the report details page
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => ReportDatailsPage(report: report),
+      //   ),
+      // );
+    } catch (e) {
+      String message = e.toString().trim();
+      context.mounted ? showErrorMessage(context, message) : null;
+    }
+  }
+
   void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),

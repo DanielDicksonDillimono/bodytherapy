@@ -68,7 +68,6 @@ class ReportsViewmodel extends ChangeNotifier {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (context) => ReportCreationPage(
-        createReportCallback: createReportCallback,
         reportCreationViewmodel: ReportCreationViewmodel(
           reportsRepository: _reportsRepository,
         ),
