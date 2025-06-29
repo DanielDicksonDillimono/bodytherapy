@@ -18,13 +18,13 @@ class ReportDatailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text('Affected Area: ${report.affectedArea.name}',
+                style: Theme.of(context).textTheme.bodyMedium),
             Text(
               'Report Details',
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             SizedBox(height: 16.0),
-            Text('Affected Area: ${report.affectedArea.name}',
-                style: Theme.of(context).textTheme.bodyMedium),
             Text(
               report.description,
               style: Theme.of(context).textTheme.bodyLarge,
