@@ -36,41 +36,36 @@ class ReportCreationPage extends StatelessWidget {
             Text('Affected Area',
                 style: Theme.of(context).textTheme.headlineSmall),
             SizedBox(height: Dimens.of(context).paddingScreenVertical),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 10,
-              ),
-              child: ListenableBuilder(
-                listenable: reportCreationViewmodel,
-                builder: (context, _) => Wrap(
-                  spacing: 2,
-                  children: AffectedArea.values
-                      .map(
-                        (area) => Container(
-                          width: Dimens.textCardWidth(context),
-                          padding: EdgeInsets.all(4.0),
-                          child: ListTile(
-                            titleAlignment: ListTileTitleAlignment.center,
-                            tileColor:
-                                reportCreationViewmodel.selectedArea == area
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).colorScheme.surface,
-                            onTap: () {
-                              reportCreationViewmodel.setSelectedArea(area);
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            title: Text(
-                              area.name,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
+            ListenableBuilder(
+              listenable: reportCreationViewmodel,
+              builder: (context, _) => Wrap(
+                spacing: 2,
+                children: AffectedArea.values
+                    .map(
+                      (area) => Container(
+                        width: Dimens.textCardWidth(context),
+                        padding: EdgeInsets.all(4.0),
+                        child: ListTile(
+                          titleAlignment: ListTileTitleAlignment.center,
+                          tileColor:
+                              reportCreationViewmodel.selectedArea == area
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.surface,
+                          onTap: () {
+                            reportCreationViewmodel.setSelectedArea(area);
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          title: Text(
+                            area.name,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
-                      )
-                      .toList(),
-                ),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
             SizedBox(height: Dimens.of(context).paddingScreenVertical),
