@@ -31,7 +31,9 @@ class ReportsPage extends StatelessWidget {
                     ? const Center(child: CircularProgressIndicator())
                     : ReportCard(
                         key: Key(index.toString() +
-                            reportsViewmodel.allReports[index].name),
+                            (reportsViewmodel.allReports[index].name ??
+                                reportsViewmodel.allReports[index].reportedDate
+                                    .toString())),
                         report: reportsViewmodel.allReports[index],
                         onTap: () => reportsViewmodel.openReportDetails(
                             context, reportsViewmodel.allReports[index]),

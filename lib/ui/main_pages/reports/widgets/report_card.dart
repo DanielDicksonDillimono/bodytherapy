@@ -14,13 +14,13 @@ class ReportCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(report.name),
+        title: Text(report.name ?? 'Report on ${report.reportedDate}'),
         subtitle: Text(report.description),
         leading: CircleAvatar(
           //TODO: Use affected area icon
           backgroundColor: Theme.of(context).colorScheme.primary,
           child: Text(
-            report.name.isNotEmpty ? report.name[0].toUpperCase() : '?',
+            report.name != null ? report.name![1] : '?',
             style: TextStyle(color: Colors.white),
           ),
         ),

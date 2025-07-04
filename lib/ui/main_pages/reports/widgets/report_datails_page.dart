@@ -11,7 +11,7 @@ class ReportDatailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(report.name),
+        title: Text(report.name ?? 'Report Details'),
       ),
       body: Padding(
         padding: Dimens.of(context).edgeInsetsScreenSymmetric,

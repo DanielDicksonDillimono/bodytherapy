@@ -1,9 +1,11 @@
+import 'package:bodytherapy/firebase_options.dart';
 import 'package:bodytherapy/navigation/router.dart';
 import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:bodytherapy/ui/core/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'config/dependencies.dart' as my_dependencies;
@@ -13,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  //await dotenv.load(fileName: "/.env");
   /*Lesson: 
     runApp(Widget), function in binding.dart takes the root Widget to be placed in the View.
     This is easier than creating a custom View using runWidget().

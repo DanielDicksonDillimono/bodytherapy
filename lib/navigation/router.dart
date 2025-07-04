@@ -43,25 +43,25 @@ GoRouter router(UserAuthentication userAuthentication) => GoRouter(
           },
           branches: [
             //home tab branch
-            StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  path: Routes.home,
-                  builder: (BuildContext context, GoRouterState state) =>
-                      HomePage(
-                    viewModel: HomeViewModel(
-                        reportsRepository: context.read(),
-                        userRepository: context.read()),
-                  ),
-                ),
-              ],
-            ),
+            // StatefulShellBranch(
+            //   routes: [
+            //     GoRoute(
+            //       path: Routes.home,
+            //       builder: (BuildContext context, GoRouterState state) =>
+            //           HomePage(
+            //         viewModel: HomeViewModel(
+            //             reportsRepository: context.read(),
+            //             userRepository: context.read()),
+            //       ),
+            //     ),
+            //   ],
+            // ),
 
             //Reports tab branch
             StatefulShellBranch(
               routes: [
                 GoRoute(
-                  path: Routes.reports,
+                  path: Routes.home,
                   builder: (BuildContext context, GoRouterState state) =>
                       ReportsPage(
                     reportsViewmodel: ReportsViewmodel(
@@ -73,20 +73,20 @@ GoRouter router(UserAuthentication userAuthentication) => GoRouter(
               ],
             ),
 
-            //Exercises tab branch
-            StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  path: Routes.exercises,
-                  builder: (BuildContext context, GoRouterState state) =>
-                      ExerciseLibraryPage(
-                    exerciseLibraryModel: ExerciseLibraryViewModel(
-                      exerciseRepository: context.read(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // //Exercises tab branch
+            // StatefulShellBranch(
+            //   routes: [
+            //     GoRoute(
+            //       path: Routes.exercises,
+            //       builder: (BuildContext context, GoRouterState state) =>
+            //           ExerciseLibraryPage(
+            //         exerciseLibraryModel: ExerciseLibraryViewModel(
+            //           exerciseRepository: context.read(),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
 
             //Preferences tab branch
             StatefulShellBranch(

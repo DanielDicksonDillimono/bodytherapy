@@ -38,6 +38,17 @@ class ReportsRepository {
     }
   }
 
+  Future<String> diagnoseReport(Report report) async {
+    String diagnosis = '';
+    try {
+      final responseDiagnosis = await _aiService.diagnose(report.description);
+      diagnosis = responseDiagnosis['diagnosis'] ?? 'No diagnosis available';
+    } catch (e) {
+      //diplay error
+    }
+    return diagnosis;
+  }
+
   Future updateReport(Report report) async {
     try {} catch (e) {
       //diplay error
