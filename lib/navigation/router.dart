@@ -7,9 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'package:bodytherapy/ui/main_pages/exercises/view_models/exercise_library_viewmodel.dart';
-import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_library_page.dart';
-import 'package:bodytherapy/ui/main_pages/home/view_models/home_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/preferences/view_models/preferences_model.dart';
 import 'package:bodytherapy/ui/main_pages/preferences/widgets/preferences_page.dart';
 import 'package:bodytherapy/ui/main_pages/reports/view_models/reports_viewmodel.dart';
@@ -17,7 +14,6 @@ import 'package:bodytherapy/ui/main_pages/reports/widgets/reports_page.dart';
 
 import 'routes.dart';
 import 'scaffold_with_bottom_nav_bar.dart';
-import 'package:bodytherapy/ui/main_pages/home/widgets/home_page.dart';
 
 GoRouter router(UserAuthentication userAuthentication) => GoRouter(
       initialLocation: Routes.home,

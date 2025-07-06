@@ -62,7 +62,7 @@ class ReportCreationViewmodel extends ChangeNotifier {
         ? Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DiagnosisPreviewer(diagnosis: diagnosis!),
+              builder: (context) => DiagnosisPreviewer(diagnosis: diagnosis),
             ),
           )
         : null;

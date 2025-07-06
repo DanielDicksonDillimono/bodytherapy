@@ -30,6 +30,14 @@ class LoginPage extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              Image.asset(
+                                'assets/icon/icon.png',
+                                height: 100,
+                                width: 100,
+                              ),
+                              SizedBox(
+                                  height:
+                                      Dimens.of(context).paddingScreenVertical),
                               TextFormField(
                                 controller: loginViewModel.emailController,
                                 decoration: InputDecoration(

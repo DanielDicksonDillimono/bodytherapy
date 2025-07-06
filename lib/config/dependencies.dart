@@ -21,16 +21,13 @@ List<SingleChildWidget> providers = [
     create: (context) => ReportsRepository(
         aiService: AiService(),
         databaseService: DatabaseService(
-            FirebaseFirestore.instance, FirebaseAuth.instance.currentUser!)),
+            FirebaseFirestore.instance, FirebaseAuth.instance.currentUser)),
   ),
   Provider(
     create: (context) => ExercisesRepository(),
   ),
   Provider(
     create: (context) => DatabaseService(
-        FirebaseFirestore.instance, FirebaseAuth.instance.currentUser!),
+        FirebaseFirestore.instance, FirebaseAuth.instance.currentUser),
   )
-  // Provider(
-  //   create: (context) => S,
-  // )
 ];

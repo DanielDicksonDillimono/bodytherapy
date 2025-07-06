@@ -9,7 +9,7 @@ class DatabaseService {
   //This is useful for "admin" functionalities where we need to access other users' data.
 
   final FirebaseFirestore _firestore;
-  final User _user;
+  final User? _user;
 
   DatabaseService(this._firestore, this._user);
 
@@ -25,7 +25,7 @@ class DatabaseService {
 
   Future<void> createReport(Map<String, dynamic> data) async {
     try {
-      await usersCollection.doc(_user.uid).collection('reports').add(data);
+      await usersCollection.doc(_user!.uid).collection('reports').add(data);
     } catch (e) {
       throw Exception('Failed to create report: $e');
     }
@@ -33,7 +33,7 @@ class DatabaseService {
 
   Future<void> updateUser(Map<String, dynamic> data) async {
     try {
-      await _firestore.collection('users').doc(_user.uid).update(data);
+      await _firestore.collection('users').doc(_user!.uid).update(data);
     } catch (e) {
       throw Exception('Failed to update user: $e');
     }
@@ -42,7 +42,7 @@ class DatabaseService {
   Future<List<Map<String, dynamic>>> getReports() async {
     try {
       QuerySnapshot snapshot =
-          await usersCollection.doc(_user.uid).collection('reports').get();
+          await usersCollection.doc(_user!.uid).collection('reports').get();
       return snapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
@@ -64,7 +64,7 @@ class DatabaseService {
   Future updateReport(String reportId, Map<String, dynamic> data) async {
     try {
       await usersCollection
-          .doc(_user.uid)
+          .doc(_user!.uid)
           .collection('reports')
           .doc(reportId)
           .update(data);
@@ -76,7 +76,7 @@ class DatabaseService {
   Future<void> deleteReport(String reportId) async {
     try {
       await usersCollection
-          .doc(_user.uid)
+          .doc(_user!.uid)
           .collection('reports')
           .doc(reportId)
           .delete();
@@ -87,7 +87,7 @@ class DatabaseService {
 
   Future<void> deleteUser() async {
     try {
-      await _firestore.collection('users').doc(_user.uid).delete();
+      await _firestore.collection('users').doc(_user!.uid).delete();
     } catch (e) {
       throw Exception('Failed to delete user: $e');
     }
