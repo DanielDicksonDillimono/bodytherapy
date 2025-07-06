@@ -1,5 +1,6 @@
 import 'package:bodytherapy/data/repositories/reports_repository.dart';
 import 'package:bodytherapy/domain/models/report_model.dart';
+import 'package:bodytherapy/ui/main_pages/reports/view_models/diagnosis_preview_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/reports/widgets/diagnosis_previewer.dart';
 import 'package:flutter/material.dart';
 
@@ -42,30 +43,40 @@ class ReportCreationViewmodel extends ChangeNotifier {
   }
 
   Future<void> previewReport(BuildContext context) async {
-    String diagnosis = '';
     if (isLoading) return;
     isLoading = true;
     notifyListeners();
+
     if (!formKey.currentState!.validate()) return;
     try {
-      final report = Report(
+      var report = Report(
         description: descriptionController.text.trim(),
         affectedArea: selectedArea,
         reportedDate: DateTime.now(),
       );
-      diagnosis = await reportsRepository.diagnoseReport(report);
+      var diagnosis = await reportsRepository.diagnoseReport(report);
+      report.name = diagnosis['name'];
+      report.diagnosis = diagnosis['diagnosis'];
+      report.recommendation = diagnosis['recommendation'];
+
+      context.mounted
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DiagnosisPreviewer(
+                  report: report,
+                  diagnosisPreviewViewmodel: DiagnosisPreviewViewmodel(
+                    reportsRepository: reportsRepository,
+                  ),
+                ),
+              ),
+            )
+          : null;
     } catch (e) {
       String message = e.toString().trim();
       context.mounted ? showErrorMessage(context, message) : null;
     }
-    context.mounted
-        ? Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DiagnosisPreviewer(diagnosis: diagnosis),
-            ),
-          )
-        : null;
+
     // isLoading = false;
     // notifyListeners();
   }

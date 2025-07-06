@@ -22,7 +22,7 @@ class AiService {
         title: 'Diagnosis',
       ),
       'recommendation': Schema.string(
-        description: 'A recommendation for the physiotherapy treatment.',
+        description: 'A recommendation for the physiotherapeautic treatment.',
         title: 'Recommendation',
       ),
     },

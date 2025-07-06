@@ -38,15 +38,21 @@ class ReportsRepository {
     }
   }
 
-  Future<String> diagnoseReport(Report report) async {
-    String diagnosis = '';
+  Future<Map<String, dynamic>> diagnoseReport(Report report) async {
+    Map<String, dynamic> response = {};
     try {
       final responseDiagnosis = await _aiService.diagnose(report.description);
-      diagnosis = responseDiagnosis['diagnosis'] ?? 'No diagnosis available';
+      response = {
+        'name': responseDiagnosis['name'],
+        'diagnosis': responseDiagnosis['diagnosis'],
+        'recommendation': responseDiagnosis['recommendation'],
+        'affectedArea': report.affectedArea,
+        'reportedDate': report.reportedDate.toIso8601String(),
+      };
     } catch (e) {
       //diplay error
     }
-    return diagnosis;
+    return response;
   }
 
   Future updateReport(Report report) async {
@@ -64,8 +70,18 @@ class ReportsRepository {
     return retreivedReports;
   }
 
-  Future saveReport() async {
-    try {} catch (e) {
+  Future saveReport(Report report) async {
+    try {
+      final data = {
+        'title': report.name,
+        'description': report.description,
+        'date': report.reportedDate.toIso8601String(),
+        'affectedArea': report.affectedArea.name,
+        'diagnosis': report.diagnosis,
+        'recommendation': report.recommendation,
+      };
+      await _databaseService.createReport(data);
+    } catch (e) {
       //diplay error
     }
     //save to DB
