@@ -17,6 +17,25 @@ class ReportsRepository {
   final DatabaseService _databaseService;
   final AiService _aiService;
 
+  Stream<List<Report>> getReportsStream() {
+    return _databaseService.reportsStream.map((snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        return Report(
+          name: data['title'] ?? '',
+          description: data['description'] ?? '',
+          reportedDate: DateTime.parse(data['date']),
+          affectedArea: AffectedArea.values.firstWhere(
+            (area) => area.name == data['affectedArea'],
+            orElse: () => AffectedArea.other,
+          ),
+          diagnosis: data['diagnosis'] ?? '',
+          recommendation: data['recommendation'] ?? '',
+        );
+      }).toList();
+    });
+  }
+
   Future<List<Report>> getAllReports(String userId) async {
     List<Report> retreivedReports = [];
     try {} catch (e) {

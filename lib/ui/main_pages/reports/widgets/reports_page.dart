@@ -21,22 +21,25 @@ class ReportsPage extends StatelessWidget {
         label: Text('Create Report'),
       ),
       body: SafeArea(
-        child: ListenableBuilder(
-          listenable: reportsViewmodel,
-          builder: (context, _) => ListView.builder(
-            itemCount: reportsViewmodel.allReports.length,
+        child: StreamBuilder(
+          stream: reportsViewmodel.reportsStream,
+          builder: (context, snapshot) => ListView.builder(
+            itemCount: snapshot.hasData ? snapshot.data!.length : 0,
             padding: EdgeInsets.all(8.0),
-            itemBuilder: (BuildContext context, int index) =>
-                reportsViewmodel.isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : ReportCard(
+            itemBuilder: (BuildContext context, int index) => reportsViewmodel
+                    .isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : snapshot.hasData
+                    ? ReportCard(
                         key: Key(index.toString() +
-                            (reportsViewmodel.allReports[index].name ??
-                                reportsViewmodel.allReports[index].reportedDate
-                                    .toString())),
-                        report: reportsViewmodel.allReports[index],
+                            (snapshot.data![index].name ??
+                                snapshot.data![index].reportedDate.toString())),
+                        report: snapshot.data![index],
                         onTap: () => reportsViewmodel.openReportDetails(
-                            context, reportsViewmodel.allReports[index]),
+                            context, snapshot.data![index]),
+                      )
+                    : Center(
+                        child: Text('No reports available.'),
                       ),
           ),
         ),

@@ -25,8 +25,10 @@ class ReportsViewmodel extends ChangeNotifier {
 
   List<Report> get allReports => _allReports;
   List<Report> get diagnosedReports => _diagnosedReports;
+  Stream<List<Report>> get reportsStream =>
+      _reportsRepository.getReportsStream();
 
-  Future initValues(BuildContext context) async {
+  Future initValues() async {
     isLoading = true;
     try {
       user = await _userRepository.getUser();
@@ -35,8 +37,8 @@ class ReportsViewmodel extends ChangeNotifier {
       _allReports = await _reportsRepository.getAllReports(userId);
       _diagnosedReports = await _reportsRepository.getDiagnosedReports(userId);
     } catch (e) {
-      String message = e.toString().trim();
-      context.mounted ? showErrorMessage(context, message) : null;
+      // String message = e.toString().trim();
+      // context.mounted ? showErrorMessage(context, message) : null;
     } finally {
       isLoading = false;
       notifyListeners();
@@ -48,7 +50,8 @@ class ReportsViewmodel extends ChangeNotifier {
       if (user == null) return;
       await _reportsRepository.createReport(report);
       _allReports.add(report);
-      notifyListeners();
+      initValues();
+      // notifyListeners();
     } catch (e) {
       String message = e.toString().trim();
       context.mounted ? showErrorMessage(context, message) : null;

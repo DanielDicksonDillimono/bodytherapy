@@ -5,6 +5,7 @@ class Report {
     required DateTime reportedDate,
     required AffectedArea affectedArea,
     List<String>? prescribedExercisesIds,
+    this.recommendation,
     this.diagnosis,
   })  : _description = description,
         _reportedDate = reportedDate,

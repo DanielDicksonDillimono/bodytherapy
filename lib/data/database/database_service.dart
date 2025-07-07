@@ -14,6 +14,11 @@ class DatabaseService {
   DatabaseService(this._firestore, this._user);
 
   var usersCollection = FirebaseFirestore.instance.collection('users');
+  var reportsStream = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .collection('reports')
+      .snapshots();
 
   Future<void> createUser(String userId, Map<String, dynamic> data) async {
     try {
