@@ -88,7 +88,8 @@ class LoginPage extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () => loginViewModel
+                                        .goToPasswordRecoveryPage(context),
                                     child: Text(AppLocalization.of(context)
                                         .forgotPassword),
                                   ),

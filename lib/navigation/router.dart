@@ -2,6 +2,7 @@ import 'package:bodytherapy/data/services/user_authentication.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/login_viewmodel.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/view_models/sign_up_viewmodel.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/login_page.dart';
+import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/password_recovery_page.dart';
 import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -31,6 +32,13 @@ GoRouter router(UserAuthentication userAuthentication) => GoRouter(
               return SignUpPage(
                 signUpViewModel:
                     SignUpViewmodel(context.read(), context.read()),
+              );
+            }),
+        GoRoute(
+            path: Routes.passwordRecovery,
+            builder: (context, state) {
+              return PasswordRecoveryPage(
+                userAuthentication: context.read(),
               );
             }),
         StatefulShellRoute.indexedStack(
@@ -107,7 +115,17 @@ Future<String?> _redirect(BuildContext context, GoRouterState state) async {
       context.read<UserAuthentication>().currentUser() != null;
 
   if (!isloggedIn) {
-    return state.fullPath == Routes.signUp ? Routes.signUp : Routes.login;
+    // return state.fullPath == Routes.signUp ? Routes.signUp : Routes.login;
+    switch (state.fullPath) {
+      case Routes.login:
+        return Routes.login; // Already on login page
+      case Routes.signUp:
+        return Routes.signUp; // Redirect to sign up page
+      case Routes.passwordRecovery:
+        return Routes.passwordRecovery; // Redirect to password recovery page
+      default:
+        return Routes.login; // Default redirect to login page
+    }
   }
   if (isloggedIn && state.fullPath == Routes.login) {
     return Routes.home;

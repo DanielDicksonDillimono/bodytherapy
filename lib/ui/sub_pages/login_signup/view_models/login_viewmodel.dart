@@ -41,6 +41,10 @@ class LoginViewModel extends ChangeNotifier {
     context.go(Routes.signUp);
   }
 
+  void goToPasswordRecoveryPage(BuildContext context) {
+    context.go(Routes.passwordRecovery);
+  }
+
   void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
