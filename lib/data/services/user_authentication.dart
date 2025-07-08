@@ -5,11 +5,9 @@ class UserAuthentication extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth;
   UserAuthentication(this._firebaseAuth);
 
-  User? _user;
-
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  User? currentUser() => _user;
+  User? currentUser() => _firebaseAuth.currentUser;
   bool initialLogin = false;
 
   void setInitialLogin(bool value) {
@@ -20,12 +18,11 @@ class UserAuthentication extends ChangeNotifier {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      _user = _firebaseAuth.currentUser;
+
       initialLogin = true;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.message);
     } finally {
-      _user = _firebaseAuth.currentUser;
       notifyListeners();
     }
   }
@@ -33,12 +30,9 @@ class UserAuthentication extends ChangeNotifier {
   Future<void> signOut() async {
     try {
       await _firebaseAuth.signOut();
-      _user = _firebaseAuth.currentUser;
-      notifyListeners();
     } on FirebaseAuthException catch (e) {
       throw Exception(e.message);
     } finally {
-      _user = null;
       notifyListeners();
     }
   }
@@ -51,7 +45,6 @@ class UserAuthentication extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       throw Exception(e.message);
     } finally {
-      _user = _firebaseAuth.currentUser;
       notifyListeners();
     }
   }
