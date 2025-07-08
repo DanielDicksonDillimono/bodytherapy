@@ -35,8 +35,6 @@ class ReportsPage extends StatelessWidget {
                             (snapshot.data![index].name ??
                                 snapshot.data![index].reportedDate.toString())),
                         report: snapshot.data![index],
-                        onTap: () => reportsViewmodel.openReportDetails(
-                            context, snapshot.data![index]),
                       )
                     : Center(
                         child: Text('No reports available.'),
