@@ -1,6 +1,7 @@
 import 'package:bodytherapy/data/services/user_authentication.dart';
 import 'package:bodytherapy/navigation/routes.dart';
 import 'package:bodytherapy/ui/core/localization/applocalization.dart';
+import 'package:bodytherapy/ui/sub_pages/login_signup/widgets/password_recovery_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,7 +43,14 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   void goToPasswordRecoveryPage(BuildContext context) {
-    context.go(Routes.passwordRecovery);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PasswordRecoveryPage(
+          userAuthentication: userAuthenticationService,
+        ),
+      ),
+    );
   }
 
   void showErrorMessage(BuildContext context, String message) {

@@ -9,7 +9,7 @@ class SignUpPage extends StatelessWidget {
   const SignUpPage({required this.signUpViewModel, super.key});
 
   final SignUpViewmodel signUpViewModel;
-
+//TODO: Applocalization- Remove hardcoded strings and use AppLocalization for all text
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,6 +38,16 @@ class SignUpPage extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              Text(
+                                'Create Account',
+                                style: Theme.of(context).textTheme.displayLarge,
+                              ),
+                              SizedBox(height: 20),
+                              Text(
+                                'Please fill in the details below to create your account.',
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
                               TextFormField(
                                 controller: signUpViewModel.nameController,
                                 decoration: InputDecoration(

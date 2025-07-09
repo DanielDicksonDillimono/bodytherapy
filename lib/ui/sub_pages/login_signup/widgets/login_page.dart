@@ -38,6 +38,13 @@ class LoginPage extends StatelessWidget {
                               SizedBox(
                                   height:
                                       Dimens.of(context).paddingScreenVertical),
+                              Text('BODYTHERAPY',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium),
+                              SizedBox(
+                                  height:
+                                      Dimens.of(context).paddingScreenVertical),
                               TextFormField(
                                 controller: loginViewModel.emailController,
                                 decoration: InputDecoration(
