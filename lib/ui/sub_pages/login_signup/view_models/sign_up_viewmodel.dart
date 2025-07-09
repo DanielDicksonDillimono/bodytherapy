@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:bodytherapy/data/database/database_service.dart';
+import 'package:bodytherapy/data/services/pdf_api.dart';
 import 'package:bodytherapy/navigation/routes.dart';
 import 'package:bodytherapy/ui/core/localization/applocalization.dart';
+import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:bodytherapy/data/services/user_authentication.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path/path.dart';
 
 class SignUpViewmodel extends ChangeNotifier {
   SignUpViewmodel(this.userAuthentication, this.databaseService);
@@ -17,9 +23,53 @@ class SignUpViewmodel extends ChangeNotifier {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  bool termsAccepted = false;
+
+  void setTermsAccepted(bool value) {
+    termsAccepted = value;
+    notifyListeners();
+  }
+
+  void openTermsAndConditions(BuildContext context) async {
+    String filePath = "assets/TandC.pdf";
+    File file = await PDFApi.loadAssetPDF(filePath);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Padding(
+          padding: Dimens.of(context).edgeInsetsScreenSymmetric,
+          child: Column(
+            children: [
+              Expanded(
+                child: PDFView(
+                  filePath: file.path,
+                  enableSwipe: true,
+                ),
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  setTermsAccepted(true);
+                  Navigator.pop(context);
+                },
+                child: Text(AppLocalization.of(context).iAccept),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   Future<void> signUp(BuildContext context) async {
     if (!formKey.currentState!.validate()) return;
+
+    if (termsAccepted == false) {
+      context.mounted
+          ? showErrorMessage(context, AppLocalization.of(context).acceptTerms)
+          : null;
+      return;
+    }
 
     isLoading = true;
     notifyListeners();

@@ -36,6 +36,9 @@ class AppLocalization {
     'enter_valid_name': 'Please enter a valid name',
     'sign_up_failed': 'Sign Up Failed',
     'create_report': 'Create Report',
+    'accept_terms': 'Please accept the terms and conditions',
+    'terms_conditions': 'Terms and Conditions',
+    'i_accept': 'I Accept',
   };
 
 //in case the key is not found, it will return the key itself
@@ -76,6 +79,9 @@ class AppLocalization {
   String get enterValidName => _get('enter_valid_name');
   String get signUpFailed => _get('key_sign_up_failed');
   String get createReport => _get('Create Report');
+  String get acceptTerms => _get('accept_terms');
+  String get termsConditions => _get('terms_conditions');
+  String get iAccept => _get('i_accept');
 
   String defaultError(String message) =>
       '$message An error occurred. Please try again.';

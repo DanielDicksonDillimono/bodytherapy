@@ -16,10 +16,20 @@ class PreferencesPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Text("Preferences"),
-                ElevatedButton(
-                    onPressed: () => preferencesModel.logout(context),
-                    child: Text("Logout")),
+                Text("ABOUT", style: Theme.of(context).textTheme.displayLarge),
+                SizedBox(height: 20),
+                Text(
+                  "Body Therapy is a mobile application designed to help you manage your physical well-being. The goal is to provide you with the tools and resources you need to lead a healthier, happier life.",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                GestureDetector(
+                  onTap: () => preferencesModel.logout(context),
+                  child: ListTile(
+                    leading: Icon(Icons.logout),
+                    title: Text('Log out'),
+                  ),
+                ),
               ],
             ),
           ),

@@ -95,6 +95,21 @@ class SignUpPage extends StatelessWidget {
                                             ? "Passwords do not match"
                                             : null,
                               ),
+                              Row(
+                                children: [
+                                  TextButton(
+                                      onPressed: () => signUpViewModel
+                                          .openTermsAndConditions(context),
+                                      child: Text(AppLocalization.of(context)
+                                          .termsConditions)),
+                                  Checkbox(
+                                      value: signUpViewModel.termsAccepted,
+                                      onChanged: (value) {
+                                        signUpViewModel
+                                            .setTermsAccepted(value!);
+                                      })
+                                ],
+                              ),
                               SizedBox(height: 20),
                               ElevatedButton(
                                 onPressed: () {
