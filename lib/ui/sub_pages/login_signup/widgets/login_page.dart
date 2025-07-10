@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
                               ),
                               TextFormField(
                                 controller: loginViewModel.passwordController,
-                                obscureText: loginViewModel.isPasswordVisible,
+                                obscureText: !loginViewModel.isPasswordVisible,
                                 decoration: InputDecoration(
                                   labelText:
                                       AppLocalization.of(context).password,

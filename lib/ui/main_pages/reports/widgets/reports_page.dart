@@ -1,3 +1,4 @@
+import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:bodytherapy/ui/main_pages/reports/view_models/reports_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/reports/widgets/report_card.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,6 @@ class ReportsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Reports'),
-      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: reportsViewmodel.isLoading
             ? null
@@ -21,24 +19,55 @@ class ReportsPage extends StatelessWidget {
         label: Text('Create Report'),
       ),
       body: SafeArea(
-        child: StreamBuilder(
-          stream: reportsViewmodel.reportsStream,
-          builder: (context, snapshot) => ListView.builder(
-            itemCount: snapshot.hasData ? snapshot.data!.length : 0,
-            padding: EdgeInsets.all(8.0),
-            itemBuilder: (BuildContext context, int index) => reportsViewmodel
-                    .isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : snapshot.hasData
-                    ? ReportCard(
-                        key: Key(index.toString() +
-                            (snapshot.data![index].name ??
-                                snapshot.data![index].reportedDate.toString())),
-                        report: snapshot.data![index],
-                      )
-                    : Center(
-                        child: Text('No reports available.'),
-                      ),
+        child: Container(
+          padding: Dimens.of(context).edgeInsetsScreenSymmetric,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Reports',
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: Dimens.of(context).paddingScreenVertical),
+              Text(
+                'View and manage reports related to your physical well-being.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              Text(
+                "This app is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: StreamBuilder(
+                  stream: reportsViewmodel.reportsStream,
+                  builder: (context, snapshot) => ListView.builder(
+                    itemCount: snapshot.hasData ? snapshot.data!.length : 0,
+                    itemBuilder: (BuildContext context, int index) =>
+                        reportsViewmodel.isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : snapshot.hasData
+                                ? ReportCard(
+                                    key: Key(index.toString() +
+                                        (snapshot.data![index].name ??
+                                            snapshot.data![index].reportedDate
+                                                .toString())),
+                                    report: snapshot.data![index],
+                                  )
+                                : Center(
+                                    child: Column(
+                                      children: [
+                                        Icon(Icons.note),
+                                        SizedBox(height: 20),
+                                        Text('No reports available.'),
+                                      ],
+                                    ),
+                                  ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

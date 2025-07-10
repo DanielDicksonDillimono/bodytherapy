@@ -42,9 +42,13 @@ class SignUpPage extends StatelessWidget {
                                 'Create Account',
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),
+                              Text(
+                                "Disclaimer: This app is intended for informational purposes only and should not be considered a substitute for professional medical advice, diagnosis, or treatment.",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
                               SizedBox(height: 20),
                               Text(
-                                'Please fill in the details below to create your account.',
+                                'Please fill in the details below to create an account.',
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),

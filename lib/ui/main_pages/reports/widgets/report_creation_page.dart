@@ -39,9 +39,8 @@ class ReportCreationPage extends StatelessWidget {
                       SizedBox(
                           height: Dimens.of(context).paddingScreenVertical),
                       Text('Affected Area',
-                          style: Theme.of(context).textTheme.headlineSmall),
-                      SizedBox(
-                          height: Dimens.of(context).paddingScreenVertical),
+                          style: Theme.of(context).textTheme.labelLarge),
+
                       ListenableBuilder(
                         listenable: reportCreationViewmodel,
                         builder: (context, _) => Wrap(
@@ -122,6 +121,10 @@ class ReportCreationPage extends StatelessWidget {
                         decoration: InputDecoration(
                           labelText: 'Description',
                           icon: Icon(Icons.description),
+                          hint: Text(
+                            'Enter a brief description of the issue',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                         ),
                         maxLines: 5,
                         validator: (value) {

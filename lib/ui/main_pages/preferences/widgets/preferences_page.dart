@@ -19,15 +19,29 @@ class PreferencesPage extends StatelessWidget {
                 Text("ABOUT", style: Theme.of(context).textTheme.displayLarge),
                 SizedBox(height: 20),
                 Text(
-                  "Body Therapy is a mobile application designed to help you manage your physical well-being. The goal is to provide you with the tools and resources you need to lead a healthier, happier life.",
+                  "Body Therapy is designed to help you manage your physical well-being. The goal is to provide you with the tools and resources you need to lead a healthier, happier life.",
                   textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                SizedBox(height: Dimens.of(context).paddingScreenVertical),
+                Text(
+                  "Disclaimer: This app is intended for informational purposes only and should not be considered a substitute for professional medical advice, diagnosis, or treatment.",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                SizedBox(height: Dimens.of(context).paddingScreenVertical),
+                Text(
+                  "Version: 1.0.0",
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 GestureDetector(
                   onTap: () => preferencesModel.logout(context),
                   child: ListTile(
                     leading: Icon(Icons.logout),
-                    title: Text('Log out'),
+                    title: Text(
+                      'Log out',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ],
