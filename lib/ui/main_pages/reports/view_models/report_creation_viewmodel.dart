@@ -76,9 +76,8 @@ class ReportCreationViewmodel extends ChangeNotifier {
       String message = e.toString().trim();
       context.mounted ? showErrorMessage(context, message) : null;
     }
-
-    // isLoading = false;
-    // notifyListeners();
+    isLoading = false;
+    notifyListeners();
   }
 
   void showErrorMessage(BuildContext context, String message) {

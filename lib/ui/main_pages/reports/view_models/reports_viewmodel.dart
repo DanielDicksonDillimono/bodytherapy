@@ -3,6 +3,7 @@ import 'package:bodytherapy/data/repositories/user_repository.dart';
 import 'package:bodytherapy/domain/models/report_model.dart';
 import 'package:bodytherapy/domain/models/user_model.dart';
 import 'package:bodytherapy/ui/main_pages/reports/view_models/report_creation_viewmodel.dart';
+import 'package:bodytherapy/ui/main_pages/reports/view_models/report_details_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/reports/widgets/report_creation_page.dart';
 import 'package:bodytherapy/ui/main_pages/reports/widgets/report_datails_page.dart';
 import 'package:flutter/material.dart';
@@ -59,20 +60,27 @@ class ReportsViewmodel extends ChangeNotifier {
   }
 
   void openReportDetails(BuildContext context, Report report) {
-    Scaffold.of(context).showBottomSheet(
-      (context) => ReportDatailsPage(report: report),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ReportDatailsPage(
+          report: report,
+          reportDetailsViewmodel: ReportDetailsViewmodel(
+            reportsRepository: _reportsRepository,
+          ),
+        ),
+      ),
     );
   }
 
   void openCreateReportPage(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (context) => ReportCreationPage(
-        reportCreationViewmodel: ReportCreationViewmodel(
-          reportsRepository: _reportsRepository,
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ReportCreationPage(
+          reportCreationViewmodel: ReportCreationViewmodel(
+            reportsRepository: _reportsRepository,
+          ),
         ),
       ),
     );
@@ -80,6 +88,10 @@ class ReportsViewmodel extends ChangeNotifier {
 
   void createReportCallback(BuildContext context, Report report) {
     createReport(report, context);
+  }
+
+  void openReportDetailsCallback(BuildContext context, Report report) {
+    openReportDetails(context, report);
   }
 
   void showErrorMessage(BuildContext context, String message) {

@@ -23,6 +23,7 @@ class ReportsRepository {
         final data = doc.data();
         return Report(
           name: data['title'] ?? '',
+          id: doc.id,
           description: data['description'] ?? '',
           reportedDate: DateTime.parse(data['date']),
           affectedArea: AffectedArea.values.firstWhere(
@@ -106,8 +107,10 @@ class ReportsRepository {
     //save to DB
   }
 
-  Future deleteReport(Report report) async {
-    try {} catch (e) {
+  Future deleteReport(String reportId) async {
+    try {
+      await _databaseService.deleteReport(reportId);
+    } catch (e) {
       //diplay error
     }
     //delete from db

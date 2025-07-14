@@ -17,7 +17,13 @@ class PreferencesPage extends StatelessWidget {
             child: Column(
               children: [
                 Text("ABOUT", style: Theme.of(context).textTheme.displayLarge),
-                SizedBox(height: 20),
+                SizedBox(height: Dimens.of(context).paddingScreenVertical),
+                Image.asset(
+                  'assets/icon/icon.png',
+                  height: 50,
+                  width: 50,
+                ),
+                SizedBox(height: Dimens.of(context).paddingScreenVertical),
                 Text(
                   "Body Therapy is designed to help you manage your physical well-being. The goal is to provide you with the tools and resources you need to lead a healthier, happier life.",
                   textAlign: TextAlign.center,

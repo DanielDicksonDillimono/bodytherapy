@@ -34,10 +34,10 @@ class ReportsPage extends StatelessWidget {
                 'View and manage reports related to your physical well-being.',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              Text(
-                "This app is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+              // Text(
+              //   "This app is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.",
+              //   style: Theme.of(context).textTheme.bodyMedium,
+              // ),
               SizedBox(height: 20),
               Expanded(
                 child: StreamBuilder(
@@ -47,21 +47,33 @@ class ReportsPage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) =>
                         reportsViewmodel.isLoading
                             ? const Center(child: CircularProgressIndicator())
-                            : snapshot.hasData
+                            : snapshot.hasData && snapshot.data!.isNotEmpty
                                 ? ReportCard(
                                     key: Key(index.toString() +
                                         (snapshot.data![index].name ??
                                             snapshot.data![index].reportedDate
                                                 .toString())),
                                     report: snapshot.data![index],
+                                    onReportTap: () {
+                                      reportsViewmodel.openReportDetails(
+                                          context, snapshot.data![index]);
+                                    },
                                   )
                                 : Center(
-                                    child: Column(
-                                      children: [
-                                        Icon(Icons.note),
-                                        SizedBox(height: 20),
-                                        Text('No reports available.'),
-                                      ],
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.5,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.note),
+                                          SizedBox(height: 20),
+                                          Text(
+                                              'No reports available. Click on the button below to create a new report.'),
+                                        ],
+                                      ),
                                     ),
                                   ),
                   ),

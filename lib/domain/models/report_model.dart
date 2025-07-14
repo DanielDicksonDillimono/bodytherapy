@@ -7,12 +7,14 @@ class Report {
     List<String>? prescribedExercisesIds,
     this.recommendation,
     this.diagnosis,
+    this.id,
   })  : _description = description,
         _reportedDate = reportedDate,
         _prescribedExercisesIds = prescribedExercisesIds,
         _affectedArea = affectedArea;
 
   String? name;
+  String? id;
   final String _description;
   final DateTime _reportedDate;
   final List<String>? _prescribedExercisesIds;

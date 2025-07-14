@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:bodytherapy/data/services/user_authentication.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:go_router/go_router.dart';
-import 'package:path/path.dart';
 
 class SignUpViewmodel extends ChangeNotifier {
   SignUpViewmodel(this.userAuthentication, this.databaseService);

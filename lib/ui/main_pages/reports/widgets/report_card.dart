@@ -1,5 +1,5 @@
 import 'package:bodytherapy/domain/models/report_model.dart';
-import 'package:bodytherapy/ui/main_pages/reports/widgets/report_datails_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,8 +7,10 @@ class ReportCard extends StatelessWidget {
   const ReportCard({
     super.key,
     required this.report,
+    required this.onReportTap,
   });
   final Report report;
+  final Function() onReportTap;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +28,7 @@ class ReportCard extends StatelessWidget {
           Icons.medical_services,
           color: Theme.of(context).colorScheme.primary,
         ),
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ReportDatailsPage(report: report),
-          ),
-        ),
+        onTap: onReportTap,
       ),
     );
   }
