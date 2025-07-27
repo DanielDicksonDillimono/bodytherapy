@@ -13,11 +13,8 @@ class ExerciseViewmodel extends ChangeNotifier {
 
   String get exerciseName => exerciseModel.name;
   String get exerciseDescription => exerciseModel.description;
-  String get exerciseId => exerciseModel.id;
   String get exerciseTarget => exerciseModel.target;
-  String get exerciseCreatorId => exerciseModel.creatorId;
-  bool get isUserCreated => exerciseModel.creatorId.isNotEmpty;
-  bool get isAppGenerated => exerciseModel.creatorId.isEmpty;
+  String get exerciseYoutubeLink => exerciseModel.youtubeLink;
 
   Future<void> addExerciseToFavorites() async {
     await _exercisesRepository.addExerciseTofavorites(exerciseModel);

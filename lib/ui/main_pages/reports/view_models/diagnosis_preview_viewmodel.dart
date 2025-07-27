@@ -1,9 +1,7 @@
 import 'package:bodytherapy/data/repositories/reports_repository.dart';
 import 'package:bodytherapy/domain/models/report_model.dart';
 import 'package:bodytherapy/navigation/routes.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DiagnosisPreviewViewmodel extends ChangeNotifier {
   DiagnosisPreviewViewmodel({

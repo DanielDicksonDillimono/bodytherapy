@@ -60,7 +60,7 @@ class ReportsPage extends StatelessWidget {
                                     },
                                   )
                                 : Center(
-                                    child: Container(
+                                    child: SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.5,

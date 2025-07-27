@@ -142,6 +142,49 @@ class ReportCreationPage extends StatelessWidget {
                           ),
                           SizedBox(
                               height: Dimens.of(context).paddingScreenVertical),
+                          TextFormField(
+                            controller: reportCreationViewmodel
+                                .painInducingActivityController,
+                            decoration: InputDecoration(
+                              labelText: 'Pain Inducing Activity',
+                              icon: Icon(Icons.description),
+                              hint: Text(
+                                'what activity causes pain or discomfort?',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ),
+                            maxLines: 5,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a description';
+                              }
+                              return null;
+                            },
+                          ),
+
+                          SizedBox(
+                              height: Dimens.of(context).paddingScreenVertical),
+                          TextFormField(
+                            controller: reportCreationViewmodel
+                                .priorActivityDescriptionContoller,
+                            decoration: InputDecoration(
+                              labelText: 'Prior Activity',
+                              icon: Icon(Icons.description),
+                              hint: Text(
+                                'what were you doing before the issue started?',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ),
+                            maxLines: 5,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a description';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                              height: Dimens.of(context).paddingScreenVertical),
                           SizedBox(
                             width: double.infinity,
                             child: Column(

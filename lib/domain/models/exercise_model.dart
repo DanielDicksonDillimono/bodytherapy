@@ -1,28 +1,28 @@
 //Exercises can either be user created or App generated.
 class Exercise {
-  const Exercise(
-      {required String name,
-      required String id,
-      required String description,
-      required String creatorId,
-      required ExerciseTarget target})
-      : _name = name,
-        _id = id,
-        _description = description,
-        _creatorId = creatorId,
-        _target = target;
+  // const Exercise(
+  //     {required String name,
+  //     required String description,
+  //     required String target,
+  //     required String youtubeLink})
+  //     : _name = name,
+  //       _description = description,
+  //       _target = target,
+  //       _youtubeLink = youtubeLink;
+  Exercise(Map<String, String> exerciseData)
+      : _name = exerciseData['name'] ?? '',
+        _description = exerciseData['description'] ?? '',
+        _target = exerciseData['target'] ?? '',
+        _youtubeLink = exerciseData['youtubeLink'] ?? '';
 
   final String _name;
-  final String _id;
-  final String _creatorId;
   final String _description;
-  final ExerciseTarget _target;
-
+  final String _target;
+  final String _youtubeLink;
   String get name => _name;
-  String get id => _id;
-  String get creatorId => _creatorId;
   String get description => _description;
-  String get target => _target.name;
+  String get target => _target;
+  String get youtubeLink => _youtubeLink;
 }
 
 enum ExerciseTarget {

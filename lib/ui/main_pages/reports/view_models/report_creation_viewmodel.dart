@@ -12,6 +12,10 @@ class ReportCreationViewmodel extends ChangeNotifier {
   final ReportsRepository reportsRepository;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController painInducingActivityController =
+      TextEditingController();
+  final TextEditingController priorActivityDescriptionContoller =
+      TextEditingController();
 
   AffectedArea selectedArea = AffectedArea.other;
 
@@ -30,6 +34,8 @@ class ReportCreationViewmodel extends ChangeNotifier {
     try {
       await reportsRepository.createReport(Report(
         description: descriptionController.text.trim(),
+        priorActivityDescription: priorActivityDescriptionContoller.text.trim(),
+        painInducingActivity: painInducingActivityController.text.trim(),
         affectedArea: selectedArea,
         reportedDate: DateTime.now(),
       ));
@@ -49,15 +55,29 @@ class ReportCreationViewmodel extends ChangeNotifier {
 
     if (!formKey.currentState!.validate()) return;
     try {
-      var report = Report(
+      var undiagnosedReport = Report(
         description: descriptionController.text.trim(),
+        priorActivityDescription: priorActivityDescriptionContoller.text.trim(),
         affectedArea: selectedArea,
+        painInducingActivity: painInducingActivityController.text.trim(),
         reportedDate: DateTime.now(),
       );
-      var diagnosis = await reportsRepository.diagnoseReport(report);
-      report.name = diagnosis['name'];
-      report.diagnosis = diagnosis['diagnosis'];
-      report.recommendation = diagnosis['recommendation'];
+      var diagnosis = await reportsRepository.diagnoseReport(
+        undiagnosedReport,
+      );
+      var report = Report(
+        name: diagnosis['name'],
+        diagnosis: diagnosis['diagnosis'],
+        recommendation: diagnosis['recommendation'],
+        prescribedExercises: (diagnosis['exercises'] as List)
+            .map((e) => Map<String, String>.from(e as Map))
+            .toList(),
+        description: undiagnosedReport.description,
+        priorActivityDescription: undiagnosedReport.priorActivityDescription,
+        affectedArea: undiagnosedReport.affectedArea,
+        reportedDate: undiagnosedReport.reportedDate,
+        painInducingActivity: undiagnosedReport.painInducingActivity,
+      );
 
       context.mounted
           ? Navigator.push(

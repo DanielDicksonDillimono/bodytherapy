@@ -16,13 +16,8 @@ class ExercisesRepository {
   }
 
   Future<Exercise> getExercise(String exerciseId) async {
-    Exercise foundExercise = Exercise(
-      id: exerciseId,
-      name: '',
-      description: '',
-      target: ExerciseTarget.all,
-      creatorId: '',
-    );
+    Map<String, String> exerciseData = {};
+    Exercise foundExercise = Exercise(exerciseData);
     //await get exercise from DB
 
     return foundExercise;

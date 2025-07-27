@@ -26,12 +26,18 @@ class ReportsRepository {
           id: doc.id,
           description: data['description'] ?? '',
           reportedDate: DateTime.parse(data['date']),
+          painInducingActivity: data['painInducingActivity'] ?? '',
           affectedArea: AffectedArea.values.firstWhere(
             (area) => area.name == data['affectedArea'],
             orElse: () => AffectedArea.other,
           ),
           diagnosis: data['diagnosis'] ?? '',
           recommendation: data['recommendation'] ?? '',
+          prescribedExercises: (data['prescribedExercises'] as List?)
+                  ?.map((e) => Map<String, String>.from(e as Map))
+                  .toList() ??
+              [],
+          priorActivityDescription: data['priorActivityDescription'] ?? '',
         );
       }).toList();
     });
@@ -58,16 +64,20 @@ class ReportsRepository {
     }
   }
 
-  Future<Map<String, dynamic>> diagnoseReport(Report report) async {
+  Future<Map<String, dynamic>> diagnoseReport(Report unDiagnosedReport) async {
     Map<String, dynamic> response = {};
     try {
-      final responseDiagnosis = await _aiService.diagnose(report.description);
+      final responseDiagnosis = await _aiService.diagnose(
+          description: unDiagnosedReport.description,
+          affectedArea: unDiagnosedReport.affectedArea.name,
+          priorActivityDescription: unDiagnosedReport.priorActivityDescription);
       response = {
         'name': responseDiagnosis['name'],
         'diagnosis': responseDiagnosis['diagnosis'],
         'recommendation': responseDiagnosis['recommendation'],
-        'affectedArea': report.affectedArea,
-        'reportedDate': report.reportedDate.toIso8601String(),
+        'exercises': responseDiagnosis['exercises'],
+        'affectedArea': unDiagnosedReport.affectedArea,
+        'reportedDate': unDiagnosedReport.reportedDate.toIso8601String(),
       };
     } catch (e) {
       //diplay error
@@ -95,10 +105,13 @@ class ReportsRepository {
       final data = {
         'title': report.name,
         'description': report.description,
+        'priorActivityDescription': report.priorActivityDescription,
+        'painInducingActivity': report.painInducingActivity,
         'date': report.reportedDate.toIso8601String(),
         'affectedArea': report.affectedArea.name,
         'diagnosis': report.diagnosis,
         'recommendation': report.recommendation,
+        'prescribedExercises': report.prescribedExercises,
       };
       await _databaseService.createReport(data);
     } catch (e) {

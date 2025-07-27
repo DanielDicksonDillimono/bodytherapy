@@ -1,6 +1,8 @@
+import 'package:bodytherapy/domain/models/exercise_model.dart';
 import 'package:bodytherapy/domain/models/report_model.dart';
 import 'package:bodytherapy/ui/core/loading.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
+import 'package:bodytherapy/ui/main_pages/exercises/widgets/exercise_card.dart';
 import 'package:bodytherapy/ui/main_pages/reports/view_models/report_details_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,65 +26,98 @@ class ReportDatailsPage extends StatelessWidget {
         body: Padding(
           padding: Dimens.of(context).edgeInsetsScreenSymmetric,
           child: ListenableBuilder(
-              listenable: reportDetailsViewmodel,
-              builder: (context, child) => reportDetailsViewmodel.isLoading
-                  ? Loading()
-                  : SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            report.name ?? 'Report on ${report.reportedDate}',
-                            style: Theme.of(context).textTheme.headlineLarge,
+            listenable: reportDetailsViewmodel,
+            builder: (context, child) => reportDetailsViewmodel.isLoading
+                ? Loading()
+                : SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          report.name ?? 'Report on ${report.reportedDate}',
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        Text(
+                          'Affected Area: ${report.affectedArea.name}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        Text(
+                          'Reported Date: ${DateFormat('dd/MM/yyyy').format(report.reportedDate)}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        Text(
+                          'Report Details',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        Text(
+                          report.description,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          textAlign: TextAlign.justify,
+                        ),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        Text(
+                          report.diagnosis ?? 'No diagnosis available',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          textAlign: TextAlign.justify,
+                        ),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        Text(
+                          'Recommendation',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        Text(
+                          report.recommendation ??
+                              'No recommendation available',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          textAlign: TextAlign.justify,
+                        ),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        Text(
+                          'Recommended Exercises',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        report.prescribedExercises != null &&
+                                report.prescribedExercises!.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: report.prescribedExercises!.length,
+                                itemBuilder: (context, index) {
+                                  final exercise =
+                                      report.prescribedExercises![index];
+                                  return ExcerciseCard(
+                                      exerciseModel: Exercise(exercise));
+                                },
+                              )
+                            : Text('No exercises prescribed.'),
+                        TextButton(
+                          onPressed: () {
+                            reportDetailsViewmodel.deleteReport(
+                                report.id!, context);
+                          },
+                          child: Text(
+                            'Delete Report',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .copyWith(color: Colors.red),
                           ),
-                          SizedBox(
-                              height: Dimens.of(context).paddingScreenVertical),
-                          Text(
-                            'Affected Area: ${report.affectedArea.name}',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          Text(
-                            'Reported Date: ${DateFormat('dd/MM/yyyy').format(report.reportedDate)}',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          SizedBox(
-                              height: Dimens.of(context).paddingScreenVertical),
-                          Text(
-                            'Report Details',
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          SizedBox(
-                              height: Dimens.of(context).paddingScreenVertical),
-                          Text(
-                            report.description,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            textAlign: TextAlign.justify,
-                          ),
-                          SizedBox(
-                              height: Dimens.of(context).paddingScreenVertical),
-                          Text(
-                            report.diagnosis ?? 'No diagnosis available',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            textAlign: TextAlign.justify,
-                          ),
-                          SizedBox(
-                              height: Dimens.of(context).paddingScreenVertical),
-                          TextButton(
-                            onPressed: () {
-                              reportDetailsViewmodel.deleteReport(
-                                  report.id!, context);
-                            },
-                            child: Text(
-                              'Delete Report',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge!
-                                  .copyWith(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
+                        ),
+                      ],
+                    ),
+                  ),
+          ),
         ),
       ),
     );
