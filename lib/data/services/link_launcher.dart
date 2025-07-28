@@ -11,8 +11,7 @@ class LinkLauncher {
         throw 'Could not launch $url';
       }
     } catch (e) {
-      // Handle the error, e.g., show a dialog or a snackbar
-      print('Error launching URL: $e');
+      throw 'Could not launch $url';
     }
   }
 }

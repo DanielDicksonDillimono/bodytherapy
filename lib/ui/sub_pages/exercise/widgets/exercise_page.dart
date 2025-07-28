@@ -33,15 +33,16 @@ class ExercisePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: Dimens.of(context).paddingScreenVertical),
-              if (exerciseModel.youtubeLink.isNotEmpty)
-                ElevatedButton(
-                  onPressed: () {
-                    // Launch the YouTube link
-                    launchUrl(Uri.parse(exerciseModel.youtubeLink));
-                  },
-                  child: Text('Watch on YouTube'),
-                ),
-              SizedBox(height: Dimens.of(context).paddingScreenVertical),
+              //TODO: Add video support
+              // if (exerciseModel.youtubeLink.isNotEmpty)
+              //   ElevatedButton(
+              //     onPressed: () {
+              //       // Launch the YouTube link
+              //       launchUrl(Uri.parse(exerciseModel.youtubeLink));
+              //     },
+              //     child: Text('Watch on YouTube'),
+              //   ),
+              // SizedBox(height: Dimens.of(context).paddingScreenVertical),
             ],
           ),
         ),

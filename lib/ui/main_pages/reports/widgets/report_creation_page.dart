@@ -203,7 +203,7 @@ class ReportCreationPage extends StatelessWidget {
                                     onPressed: () => reportCreationViewmodel
                                         .previewReport(context),
                                     child: Text(
-                                      'Get Diagnosis',
+                                      'Get Interpretation',
                                       style:
                                           Theme.of(context).textTheme.bodyLarge,
                                     ),

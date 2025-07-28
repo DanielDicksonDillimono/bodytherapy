@@ -63,7 +63,7 @@ class ReportDatailsPage extends StatelessWidget {
                         SizedBox(
                             height: Dimens.of(context).paddingScreenVertical),
                         Text(
-                          report.diagnosis ?? 'No diagnosis available',
+                          report.diagnosis ?? 'No Interpretation available',
                           style: Theme.of(context).textTheme.bodyLarge,
                           textAlign: TextAlign.justify,
                         ),

@@ -37,7 +37,7 @@ class AppLocalization {
     'sign_up_failed': 'Sign Up Failed',
     'create_report': 'Create Report',
     'accept_terms': 'Please accept the terms and conditions',
-    'terms_conditions': 'Terms and Conditions',
+    'terms_conditions': 'Open Terms and Conditions',
     'i_accept': 'I Accept',
   };
 

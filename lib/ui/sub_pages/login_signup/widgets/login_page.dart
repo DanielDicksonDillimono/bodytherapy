@@ -52,6 +52,7 @@ class LoginPage extends StatelessWidget {
                                   icon: Icon(Icons.email),
                                 ),
                                 keyboardType: TextInputType.emailAddress,
+                                autofillHints: [AutofillHints.email],
                                 validator: (value) =>
                                     value == null || value.isEmpty
                                         ? AppLocalization.of(context)

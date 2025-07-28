@@ -1,10 +1,8 @@
 import 'package:bodytherapy/domain/models/report_model.dart';
-import 'package:bodytherapy/navigation/routes.dart';
 import 'package:bodytherapy/ui/core/loading.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:bodytherapy/ui/main_pages/reports/view_models/diagnosis_preview_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DiagnosisPreviewer extends StatelessWidget {
   const DiagnosisPreviewer({
@@ -67,7 +65,8 @@ class DiagnosisPreviewer extends StatelessWidget {
                                     height: Dimens.of(context)
                                         .paddingScreenVertical),
                                 Text(
-                                  report.diagnosis ?? 'No diagnosis available',
+                                  report.diagnosis ??
+                                      'No interpretation available',
                                   style: Theme.of(context).textTheme.bodyLarge,
                                   textAlign: TextAlign.justify,
                                 ),
@@ -84,7 +83,7 @@ class DiagnosisPreviewer extends StatelessWidget {
                               await diagnosisPreviewViewmodel.acceptDiagnosis(
                                   report, context);
                             },
-                            child: Text('Accept Diagnosis',
+                            child: Text('Accept Interpretation',
                                 style: Theme.of(context).textTheme.bodyLarge),
                           ),
                         ),

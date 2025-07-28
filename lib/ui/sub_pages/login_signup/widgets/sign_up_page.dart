@@ -69,6 +69,7 @@ class SignUpPage extends StatelessWidget {
                                       labelText:
                                           AppLocalization.of(context).email),
                                   keyboardType: TextInputType.emailAddress,
+                                  autofillHints: [AutofillHints.email],
                                   validator: (value) =>
                                       value == null || value.isEmpty
                                           ? AppLocalization.of(context)
@@ -106,12 +107,12 @@ class SignUpPage extends StatelessWidget {
                                           .openTermsAndConditions(context),
                                       child: Text(AppLocalization.of(context)
                                           .termsConditions)),
-                                  Checkbox(
-                                      value: signUpViewModel.termsAccepted,
-                                      onChanged: (value) {
-                                        signUpViewModel
-                                            .setTermsAccepted(value!);
-                                      })
+                                  // Checkbox(
+                                  //     value: signUpViewModel.termsAccepted,
+                                  //     onChanged: (value) {
+                                  //       signUpViewModel
+                                  //           .setTermsAccepted(value!);
+                                  //     })
                                 ],
                               ),
                               SizedBox(height: 20),
