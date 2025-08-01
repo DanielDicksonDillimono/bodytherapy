@@ -101,15 +101,12 @@ class LoginPage extends StatelessWidget {
                                     child: Text(AppLocalization.of(context)
                                         .forgotPassword),
                                   ),
-                                  Expanded(
-                                    child: TextButton(
-                                      onPressed: () => loginViewModel
-                                          .goToSignUpPage(context),
-                                      child: Text(
-                                        AppLocalization.of(context)
-                                            .signUpMessage,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        loginViewModel.goToSignUpPage(context),
+                                    child: Text(
+                                      AppLocalization.of(context).signUpMessage,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 ],

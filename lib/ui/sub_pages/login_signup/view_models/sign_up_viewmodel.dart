@@ -91,6 +91,7 @@ class SignUpViewmodel extends ChangeNotifier {
     } finally {
       isLoading = false;
       notifyListeners();
+      context.mounted ? context.go(Routes.home) : null;
     }
   }
 

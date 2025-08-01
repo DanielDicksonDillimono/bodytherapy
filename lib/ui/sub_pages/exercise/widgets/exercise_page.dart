@@ -12,41 +12,42 @@ class ExercisePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          appBar: AppBar(),
           body: SingleChildScrollView(
-        child: Padding(
-          padding: Dimens.of(context).edgeInsetsScreenSymmetric,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                exerciseModel.name,
-                style: Theme.of(context).textTheme.headlineLarge,
+            child: Padding(
+              padding: Dimens.of(context).edgeInsetsScreenSymmetric,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    exerciseModel.name,
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  SizedBox(height: Dimens.of(context).paddingScreenVertical),
+                  Text(
+                    'Target: ${exerciseModel.target}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: Dimens.of(context).paddingScreenVertical),
+                  Text(
+                    exerciseModel.description,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: Dimens.of(context).paddingScreenVertical),
+                  //TODO: Add video support
+                  // if (exerciseModel.youtubeLink.isNotEmpty)
+                  //   ElevatedButton(
+                  //     onPressed: () {
+                  //       // Launch the YouTube link
+                  //       launchUrl(Uri.parse(exerciseModel.youtubeLink));
+                  //     },
+                  //     child: Text('Watch on YouTube'),
+                  //   ),
+                  // SizedBox(height: Dimens.of(context).paddingScreenVertical),
+                ],
               ),
-              SizedBox(height: Dimens.of(context).paddingScreenVertical),
-              Text(
-                'Target: ${exerciseModel.target}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              SizedBox(height: Dimens.of(context).paddingScreenVertical),
-              Text(
-                exerciseModel.description,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              SizedBox(height: Dimens.of(context).paddingScreenVertical),
-              //TODO: Add video support
-              // if (exerciseModel.youtubeLink.isNotEmpty)
-              //   ElevatedButton(
-              //     onPressed: () {
-              //       // Launch the YouTube link
-              //       launchUrl(Uri.parse(exerciseModel.youtubeLink));
-              //     },
-              //     child: Text('Watch on YouTube'),
-              //   ),
-              // SizedBox(height: Dimens.of(context).paddingScreenVertical),
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
     );
   }
 }

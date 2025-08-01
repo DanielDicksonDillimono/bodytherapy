@@ -65,7 +65,8 @@ GoRouter router(UserAuthentication userAuthentication) => GoRouter(
             StatefulShellBranch(
               routes: [
                 GoRoute(
-                  path: Routes.home,
+                  path: Routes
+                      .home, //Note: This is the home route for reports TODO: this might be confusing. Change it to something more appropriate when we decide on the home page.
                   builder: (BuildContext context, GoRouterState state) =>
                       ReportsPage(
                     reportsViewmodel: ReportsViewmodel(
