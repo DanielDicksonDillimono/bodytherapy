@@ -84,6 +84,11 @@ class SignUpViewmodel extends ChangeNotifier {
           'createdAt': DateTime.now().toIso8601String(),
         };
         databaseService.createUser(userAuthentication.currentUser()!.uid, data);
+        /*TODO: get the currentUser from the authService class might be redundant in present scenario
+          * since we are already using FirebaseAuth.instance.currentUser in DatabaseService User getter.
+          * But in future, if we need to use a different user management system,
+          * we can pass the userId to the DatabaseService and use that userId,
+         */
       }
     } catch (e) {
       String message = e.toString().trim();

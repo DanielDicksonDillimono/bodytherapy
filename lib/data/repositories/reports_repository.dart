@@ -18,9 +18,9 @@ class ReportsRepository {
   final AiService _aiService;
 
   Stream<List<Report>> getReportsStream() {
-    return _databaseService.reportsStream.map((snapshot) {
+    return _databaseService.getReportsStream().map((snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data();
+        final data = doc.data() as Map<String, dynamic>;
         return Report(
           name: data['title'] ?? '',
           id: doc.id,

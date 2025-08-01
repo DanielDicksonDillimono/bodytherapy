@@ -6,23 +6,26 @@ class DatabaseService {
   //there should be a String userId = ' '. If the userId parameter is passed and it is not empty,
   //use that userId, otherwise use _user.uid. This way we can use the same DatabaseService for both
   //authenticated and unauthenticated users or for a different user.
-  //This is useful for "admin" functionalities where we need to access other users' data.
 
   final FirebaseFirestore _firestore;
-  final User? _user;
 
-  DatabaseService(this._firestore, this._user);
+  DatabaseService(this._firestore);
+
+  User? get _user => FirebaseAuth.instance.currentUser;
 
   var usersCollection = FirebaseFirestore.instance.collection('users');
-  var reportsStream = FirebaseFirestore.instance
-      .collection('users')
-      .doc(FirebaseAuth.instance.currentUser?.uid)
-      .collection('reports')
-      .snapshots();
+
+  Stream<QuerySnapshot> getReportsStream() {
+    return usersCollection
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('reports')
+        .snapshots();
+  }
 
   Future<void> createUser(String userId, Map<String, dynamic> data) async {
     try {
       await _firestore.collection('users').doc(userId).set(data);
+      //TODO: remove the userId parameter and use _user!.uid instead.
     } catch (e) {
       throw Exception('Failed to create user: $e');
     }

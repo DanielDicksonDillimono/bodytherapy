@@ -17,78 +17,79 @@ class DiagnosisPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: Dimens.of(context).edgeInsetsScreenSymmetric,
           child: ListenableBuilder(
-              listenable: diagnosisPreviewViewmodel,
-              builder: (context, child) => diagnosisPreviewViewmodel.isLoading
-                  ? Loading()
-                  : Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  report.name ??
-                                      'Report on ${report.reportedDate}',
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
-                                ),
-                                SizedBox(
-                                    height: Dimens.of(context)
-                                        .paddingScreenVertical),
-                                Text(
-                                  'Affected Area: ${report.affectedArea.name}',
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                SizedBox(
-                                    height: Dimens.of(context)
-                                        .paddingScreenVertical),
-                                Text(
-                                  'Report Details',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
-                                ),
-                                SizedBox(
-                                    height: Dimens.of(context)
-                                        .paddingScreenVertical),
-                                Text(
-                                  report.description,
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                  textAlign: TextAlign.justify,
-                                ),
-                                SizedBox(
-                                    height: Dimens.of(context)
-                                        .paddingScreenVertical),
-                                Text(
-                                  report.diagnosis ??
-                                      'No interpretation available',
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
+            listenable: diagnosisPreviewViewmodel,
+            builder: (context, child) => diagnosisPreviewViewmodel.isLoading
+                ? Loading()
+                : Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                report.name ??
+                                    'Report on ${report.reportedDate}',
+                                style:
+                                    Theme.of(context).textTheme.headlineLarge,
+                              ),
+                              SizedBox(
+                                  height:
+                                      Dimens.of(context).paddingScreenVertical),
+                              Text(
+                                'Affected Area: ${report.affectedArea.name}',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                              SizedBox(
+                                  height:
+                                      Dimens.of(context).paddingScreenVertical),
+                              Text(
+                                'Report Details',
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
+                              ),
+                              SizedBox(
+                                  height:
+                                      Dimens.of(context).paddingScreenVertical),
+                              Text(
+                                report.description,
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                textAlign: TextAlign.justify,
+                              ),
+                              SizedBox(
+                                  height:
+                                      Dimens.of(context).paddingScreenVertical),
+                              Text(
+                                report.diagnosis ??
+                                    'No interpretation available',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                textAlign: TextAlign.justify,
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                            height: Dimens.of(context).paddingScreenVertical),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              await diagnosisPreviewViewmodel.acceptDiagnosis(
-                                  report, context);
-                            },
-                            child: Text('Accept Interpretation',
-                                style: Theme.of(context).textTheme.bodyLarge),
-                          ),
+                      ),
+                      SizedBox(
+                          height: Dimens.of(context).paddingScreenVertical),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await diagnosisPreviewViewmodel.acceptDiagnosis(
+                                report, context);
+                          },
+                          child: Text('Accept Interpretation',
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ),
-                      ],
-                    )),
+                      ),
+                    ],
+                  ),
+          ),
         ),
       ),
     );
