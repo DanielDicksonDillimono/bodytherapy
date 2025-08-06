@@ -25,6 +25,15 @@ class AiService {
         description: 'A recommendation for the physiotherapeautic treatment.',
         title: 'Recommendation',
       ),
+      'citations': Schema.array(
+        items: Schema.string(
+          description: 'Citations for the diagnosis and recommendations.',
+          title: 'Citations',
+        ),
+        description:
+            'List of citations supporting the diagnosis and recommendations.',
+        title: 'Citations List',
+      ),
       'exercises': Schema.array(
         items: Schema.object(
           properties: {
@@ -63,7 +72,7 @@ class AiService {
     try {
       final List<Content> promptContent = [
         Content.text(
-          'Diagnose the following medical condition based on the description: $description, prior activity: $priorActivityDescription, affected area: $affectedArea. Provide a detailed diagnosis and recommendation, including a list of recommended exercises with their names, descriptions, YouTube links, and target muscle groups.',
+          'Diagnose the following medical condition based on the description: $description, prior activity: $priorActivityDescription, affected area: $affectedArea. Provide a detailed diagnosis and recommendation, including a list of recommended exercises with their names, descriptions, YouTube links, and target muscle groups. Include citations for the diagnosis and recommendations.',
         ),
       ];
       final response = await model.generateContent(

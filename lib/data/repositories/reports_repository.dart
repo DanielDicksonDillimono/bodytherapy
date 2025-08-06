@@ -38,6 +38,7 @@ class ReportsRepository {
                   .toList() ??
               [],
           priorActivityDescription: data['priorActivityDescription'] ?? '',
+          citations: List<String>.from(data['citations'] ?? []),
         );
       }).toList();
     });
@@ -78,6 +79,7 @@ class ReportsRepository {
         'exercises': responseDiagnosis['exercises'],
         'affectedArea': unDiagnosedReport.affectedArea,
         'reportedDate': unDiagnosedReport.reportedDate.toIso8601String(),
+        'citations': responseDiagnosis['citations'] ?? [],
       };
     } catch (e) {
       //diplay error
@@ -112,6 +114,7 @@ class ReportsRepository {
         'diagnosis': report.diagnosis,
         'recommendation': report.recommendation,
         'prescribedExercises': report.prescribedExercises,
+        'citations': report.citations,
       };
       await _databaseService.createReport(data);
     } catch (e) {

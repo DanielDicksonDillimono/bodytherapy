@@ -77,6 +77,7 @@ class ReportCreationViewmodel extends ChangeNotifier {
         affectedArea: undiagnosedReport.affectedArea,
         reportedDate: undiagnosedReport.reportedDate,
         painInducingActivity: undiagnosedReport.painInducingActivity,
+        citations: List<String>.from(diagnosis['citations']),
       );
 
       context.mounted

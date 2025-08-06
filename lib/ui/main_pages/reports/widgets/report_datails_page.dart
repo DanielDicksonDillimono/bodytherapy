@@ -101,6 +101,27 @@ class ReportDatailsPage extends StatelessWidget {
                                 },
                               )
                             : Text('No exercises prescribed.'),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
+                        ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: report.citations.length,
+                            itemBuilder: (context, index) {
+                              final citation = report.citations[index];
+                              return Card(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    citation,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ),
+                              );
+                            }),
+                        SizedBox(
+                            height: Dimens.of(context).paddingScreenVertical),
                         TextButton(
                           onPressed: () {
                             reportDetailsViewmodel.deleteReport(

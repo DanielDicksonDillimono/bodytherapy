@@ -1,7 +1,6 @@
 import 'package:bodytherapy/domain/models/exercise_model.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart' show launchUrl;
 
 class ExercisePage extends StatelessWidget {
   const ExercisePage({required this.exerciseModel, super.key});

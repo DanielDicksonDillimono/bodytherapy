@@ -1,3 +1,4 @@
+import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:bodytherapy/ui/main_pages/reports/view_models/reports_viewmodel.dart';
 import 'package:bodytherapy/ui/main_pages/reports/widgets/report_card.dart';
@@ -34,10 +35,10 @@ class ReportsPage extends StatelessWidget {
                 'View and manage reports related to your physical well-being.',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              // Text(
-              //   "This app is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.",
-              //   style: Theme.of(context).textTheme.bodyMedium,
-              // ),
+              Text(
+                AppLocalization.of(context).disclaimer,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               SizedBox(height: 20),
               Expanded(
                 child: StreamBuilder(

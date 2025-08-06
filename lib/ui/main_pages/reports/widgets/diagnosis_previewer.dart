@@ -1,5 +1,6 @@
 import 'package:bodytherapy/domain/models/report_model.dart';
 import 'package:bodytherapy/ui/core/loading.dart';
+import 'package:bodytherapy/ui/core/localization/applocalization.dart';
 import 'package:bodytherapy/ui/core/themes/dimens.dart';
 import 'package:bodytherapy/ui/main_pages/reports/view_models/diagnosis_preview_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,10 @@ class DiagnosisPreviewer extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                AppLocalization.of(context).disclaimer,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                              Text(
                                 report.name ??
                                     'Report on ${report.reportedDate}',
                                 style:
@@ -64,6 +69,24 @@ class DiagnosisPreviewer extends StatelessWidget {
                               SizedBox(
                                   height:
                                       Dimens.of(context).paddingScreenVertical),
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: report.citations.length,
+                                  itemBuilder: (context, index) {
+                                    final citation = report.citations[index];
+                                    return Card(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          citation,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        ),
+                                      ),
+                                    );
+                                  }),
                               Text(
                                 report.diagnosis ??
                                     'No interpretation available',

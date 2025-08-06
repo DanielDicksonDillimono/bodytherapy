@@ -20,7 +20,6 @@ class ExcerciseCard extends StatelessWidget {
           leading: Icon(Icons.accessibility_new_rounded),
           title: Text(exerciseModel.name),
           subtitle: Text(exerciseModel.target),
-          trailing: IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
         ),
       ),
     );

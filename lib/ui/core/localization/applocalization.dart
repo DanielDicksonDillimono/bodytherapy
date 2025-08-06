@@ -39,6 +39,8 @@ class AppLocalization {
     'accept_terms': 'Please accept the terms and conditions',
     'terms_conditions': 'Open Terms and Conditions',
     'i_accept': 'I Accept',
+    'Disclaimer':
+        'This app is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.',
   };
 
 //in case the key is not found, it will return the key itself
@@ -82,6 +84,7 @@ class AppLocalization {
   String get acceptTerms => _get('accept_terms');
   String get termsConditions => _get('terms_conditions');
   String get iAccept => _get('i_accept');
+  String get disclaimer => _get('Disclaimer');
 
   String defaultError(String message) =>
       '$message An error occurred. Please try again.';

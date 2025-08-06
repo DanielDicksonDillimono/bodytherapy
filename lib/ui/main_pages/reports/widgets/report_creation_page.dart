@@ -18,6 +18,9 @@ class ReportCreationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Create Report'),
+        ),
         body: Form(
           key: reportCreationViewmodel.formKey,
           child: Container(
@@ -30,8 +33,6 @@ class ReportCreationPage extends StatelessWidget {
                   : SingleChildScrollView(
                       child: Column(
                         children: [
-                          Text('Create New Report',
-                              style: Theme.of(context).textTheme.headlineLarge),
                           SizedBox(
                               height: Dimens.of(context).paddingScreenVertical),
                           Text(
